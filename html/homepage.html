@@ -16,16 +16,23 @@
 
     #page_title {
         padding: 0px;
+        margin: auto;
+        width: 75%;
         font-family: fantasy;
         font-size: 24px;
     }
 
-    #game_table {
+    .sql_table {
         padding: 10px;
     }
 
-    td {
-        width: 200px;
+    tr {
+        width: 100%;
+    }
+
+    .search {
+        padding: 10px;
+        font-size: 16px;
     }
 
  </style>
@@ -40,31 +47,46 @@
             </span>
         </div>
         <div id="search_bar">
-            <div></div>
+            <div id="search_title">
+                Search Games by Name:
+            </div>
+            <div class="search">
+                <input type="text" placeholder="Search for a game...">
+            </div>
         </div>
-        <div id="game_table"/>
-        
-        
-        <script>
-            function drawTable(rows, cols, data) {
-                var div = document.getElementById('game_table');
-                var table = document.createElement("table");
-                for(var r = 0; r < rows; r++) {
-                    var row = document.createElement("tr");
-
-                    for(var c = 0; c < cols; c++) {
-                        var cell = document.createElement("td");
-                        var text = document.createTextNode(data[cols*r+c]);
-                        cell.appendChild(text);
-                        row.appendChild(cell);
-                    }
-                    table.appendChild(row);
-                }
-                div.appendChild(table);
-            }
-
-            window.onload = drawTable(4+1,3,["Game", "ID", "Location", "Twilight Imperium", "001", "Board Game Closet A", "Twilight Imperium", "002", "Checked Out", "Captain Sonar", "003", "Board Game Closet Gordon's Room", "Risk", "004", "Speed Lake"]);
-        </script>
     </div>
+    <div id="table_header" class="sql_table">
+        <tr>
+            <td>Name</td>
+            <td>ID</td>
+            <td>Location</td>
+        </tr>
+    </div>
+    <div id="game_table" class="sql_table"/>
+    
+    
+    <script>
+        function drawTable(rows, cols, data) {
+            var div = document.getElementById('game_table');
+            var table = document.createElement("table");
+            for(var r = 0; r < rows; r++) {
+                var row = document.createElement("tr");
+
+                for(var c = 0; c < cols; c++) {
+                    var cell = document.createElement("td");
+                    var text = document.createTextNode(data[cols*r+c]);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+                }
+                table.appendChild(row);
+            }
+            div.appendChild(table);
+        }
+
+        window.onload = drawTable(4,3, ["Twilight Imperium", "001", "Board Game Closet A", 
+                                        "Twilight Imperium", "002", "Checked Out", 
+                                        "Captain Sonar", "003", "Gordon's Room", 
+                                        "Risk", "004", "Speed Lake"]);
+    </script>
 </body>
 </html>
