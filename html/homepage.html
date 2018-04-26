@@ -1,13 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/T$
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Rose-Hulman Board Games Club Rental Service</title>
-        <style type="text/css" media="screen">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Rose-Hulman Board Games Club Rental Service</title>
+    <style type="text/css" media="screen">
 
     * {
         margin: 0px 0px 0px 0px;
         padding: 0px 0px 0px 0px;
+        font-family: fantasy;
     }
 
     #title_section {
@@ -17,53 +18,89 @@
     #page_title {
         padding: 0px;
         margin: auto;
-        width: 75%;
-        font-family: fantasy;
         font-size: 24px;
     }
 
+    .sql_head {
+        padding-top: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        padding-left: 10px;
+        font-weight: bold;
+    }
+
     .sql_table {
-        padding: 10px;
+        padding-top: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        padding-left: 10px;
+    }
+
+    .sql_0 {
+        width: 200px;
+    }
+
+    .sql_1 {
+        width: 75px;
+    }
+
+    .sql_2 {
+        width: 150px;
     }
 
     tr {
         width: 100%;
     }
 
-    .search {
-        padding: 10px;
+    #search {
+        padding-top: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
         font-size: 16px;
+        width: 50%;
     }
 
- </style>
+    #search_box {
+        width: 75%;
+    }
+    
+    #search_elements {
+        width: 100%;
+    }
+
+    </style>
 </head>
 
 <body>
     <div>
         <div id="title_section">
-            <img src="https://ada.csse.rose-hulman.edu/uploads/-/system/group/avatar/13/photo.jpg" alt="RHIT Logo" width="128" height="128" class="floating_element"/>
+            <img src="rose.png" alt="RHIT Logo" width="128" height="128" class="floating_element"/>
             <span id="page_title">
                 Rose-Hulman Board Game Rental Service
             </span>
         </div>
-        <div id="search_bar">
-            <div id="search_title">
-                Search Games by Name:
-            </div>
-            <div class="search">
-                <input type="text" placeholder="Search for a game...">
-            </div>
+        <div id="search">
+            <span id="search_elements">
+                <span id="search_box">
+                    <input type="text" placeholder="Search for a game...">
+                </span>
+                <button id="search_button" type="button">
+                    Search
+                </button>
+            </span>
         </div>
     </div>
-    <div id="table_header" class="sql_table">
-        <tr>
-            <td>Name</td>
-            <td>ID</td>
-            <td>Location</td>
-        </tr>
+    <div id="table_header" class="sql_head">
+        <table>
+            <tr>
+                <td class="sql_0">Name</td>
+                <td class="sql_1">ID</td>
+                <td class="sql_2">Location</td>
+            </tr>
+        </table>
     </div>
     <div id="game_table" class="sql_table"/>
-    
     
     <script>
         function drawTable(rows, cols, data) {
@@ -74,6 +111,7 @@
 
                 for(var c = 0; c < cols; c++) {
                     var cell = document.createElement("td");
+                    cell.setAttribute("class", "sql_"+c);
                     var text = document.createTextNode(data[cols*r+c]);
                     cell.appendChild(text);
                     row.appendChild(cell);
