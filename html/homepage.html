@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/T$
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Rose-Hulman Board Games Club Rental Service</title>
+        <style type="text/css" media="screen">
+
+    * {
+        margin: 0px 0px 0px 0px;
+        padding: 0px 0px 0px 0px;
+    }
+
+    #title_section {
+        height: 128px;
+    }
+
+    #page_title {
+        padding: 0px;
+        font-family: fantasy;
+        font-size: 24px;
+    }
+
+    #game_table {
+        padding: 10px;
+    }
+
+    td {
+        width: 200px;
+    }
+
+ </style>
+</head>
+
+<body>
+    <div>
+        <div id="title_section">
+            <img src="https://ada.csse.rose-hulman.edu/uploads/-/system/group/avatar/13/photo.jpg" alt="RHIT Logo" width="128" height="128" class="floating_element"/>
+            <span id="page_title">
+                Rose-Hulman Board Game Rental Service
+            </span>
+        </div>
+        <div id="game_table"/>
+        
+        
+        <script>
+            function drawTable(rows, cols, data) {
+                var div = document.getElementById('game_table');
+                var table = document.createElement("table");
+                for(var r = 0; r < rows; r++) {
+                    var row = document.createElement("tr");
+
+                    for(var c = 0; c < cols; c++) {
+                        var cell = document.createElement("td");
+                        var text = document.createTextNode(data[cols*r+c]);
+                        cell.appendChild(text);
+                        row.appendChild(cell);
+                    }
+                    table.appendChild(row);
+                }
+                div.appendChild(table);
+            }
+
+            window.onload = drawTable(4+1,3,["Game", "ID", "Location", "Twilight Imperium", "001", "Board Game Closet A", "Twilight Imperium", "002", "Checked Out", "Captain Sonar", "003", "Board Game Closet Gordon's Room", "Risk", "004", "Speed Lake"]);
+        </script>
+    </div>
+</body>
+</html>
