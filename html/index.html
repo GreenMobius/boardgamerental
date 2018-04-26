@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/T$
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Rose-Hulman Board Games Club Rental Service</title>
+        <style type="text/css" media="screen">
+
+    * {
+        margin: 0px 0px 0px 0px;
+        padding: 0px 0px 0px 0px;
+    }
+ </style>
+</head>
+
+<body>
+    <div class="main_page">
+        <div class="page_header floating_element">
+            <img src="https://ada.csse.rose-hulman.edu/uploads/-/system/group/avatar/13/photo.jpg" alt="RHIT Logo" width="128" height="128" class="floating_element"/>
+            <span class="menu_title">
+                Rose-Hulman Board Game Rental Service
+            </span>
+        </div>
+        <div id="game_table"/>
+        <script>
+            function drawTable(rows, cols) {
+                var div = document.getElementById('game_table');
+                var table = document.createElement("table");
+                for(var r = 0; r < rows; r++) {
+                    var row = document.createElement("tr");
+
+                    for(var c = 0; c < cols; c++) {
+                        var cell = document.createElement("td");
+                        var text = document.createTextNode("("+r+","+c+")");
+                        cell.appendChild(text);
+                        row.appendChild(cell);
+                    }
+                    table.appendChild(row);
+                }
+                div.appendChild(table);
+            }
+
+	   function connect() {
+		var connection = new ActiveXObject("ADODB.Connection") ;
+
+		var connectionstring="Data Source=golem.csse.rose-hulman.edu;User ID=BoardGames38;Password=TwilightImperium20;Provider=SQLOLEDB";
+
+		connection.Open(connectionstring);
+		var rs = new ActiveXObject("ADODB.Recordset");
+
+		rs.Open("Execute GetGames", connection);
+		rs.MoveFirst
+		while(!rs.eof)
+		{
+  		   document.write(rs.fields(1));
+   		   rs.movenext;
+		}
+
+		rs.close;
+		connection.close; 	   	
+	   }
+            window.onload = connect();
+        </script>
+    </div>
+</body>
+</html>
