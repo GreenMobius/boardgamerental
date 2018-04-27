@@ -1,0 +1,66 @@
+/* Global settings */
+* {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    font-family: fantasy;
+}
+
+/* Homepage title */
+#title_section {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Results header row */
+.sql_head {
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+/* Results table */
+.sql_table {
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 10px;
+}
+
+/* Results Column 0 */
+.sql_0 {
+    width: 200px;
+}
+
+/* Results Column 1 */
+.sql_1 {
+    width: 75px;
+}
+
+/* Results Column 2 */
+.sql_2 {
+    width: 150px;
+}
+
+/* Search Box */
+#search {
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+#search_box {
+    width: 100%;
+}
+
+/* Rose-Hulman Home Page Logo */
+#img_logo {
+    /* Aligns text to center of image */
+    vertical-align: middle;
+}
+
+#search_elements {
+    width: 100%;
+}
