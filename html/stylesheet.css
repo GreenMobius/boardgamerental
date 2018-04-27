@@ -5,6 +5,10 @@
     font-family: fantasy;
 }
 
+html, body {
+    height: 100%;
+}
+
 /* Homepage title */
 #title_section {
     font-size: 24px;
@@ -18,6 +22,7 @@
     padding-bottom: 0px;
     padding-left: 10px;
     font-weight: bold;
+    width: 100%;
 }
 
 /* Results table */
@@ -26,21 +31,32 @@
     padding-right: 0px;
     padding-bottom: 10px;
     padding-left: 10px;
+    width: 100%;
 }
 
 /* Results Column 0 */
-.sql_0 {
-    width: 200px;
+.sql_game_name {
+    width: 150px;
 }
 
 /* Results Column 1 */
-.sql_1 {
-    width: 75px;
+.sql_game_desc {
+    width: 200px;
 }
 
 /* Results Column 2 */
-.sql_2 {
-    width: 150px;
+.sql_game_complexity {
+    width: 100px;
+}
+
+/* Results Column 1 */
+.sql_game_time {
+    width: 125px;
+}
+
+/* Results Column 2 */
+.sql_game_players {
+    width: 100px;
 }
 
 /* Search Box */
@@ -56,7 +72,7 @@
 
 #search_button {
     height: 100%;
-    width: 10%;
+    width: 15%;
 }
 
 /* Rose-Hulman Home Page Logo */

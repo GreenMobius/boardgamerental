@@ -33,9 +33,11 @@
             <div id="table_header" class="sql_head">
                 <table>
                     <tr>
-                        <td class="sql_0">Name</td>
-                        <td class="sql_1">ID</td>
-                        <td class="sql_2">Location</td>
+                        <td class="sql_game_name">Name</td>
+                        <td class="sql_game_desc">Description</td>
+                        <td class="sql_game_complexity">Complexity</td>
+                        <td class="sql_game_time">Playtime</td>
+                        <td class="sql_game_players">Max Players</td>
                     </tr>
                 </table>
             </div>
@@ -44,28 +46,63 @@
     </div>
 
     <script>
-        function drawTable(rows, cols, data) {
+        function drawGameTable(rows, dict) {
             var div = document.getElementById('game_table');
             var table = document.createElement("table");
             for(var r = 0; r < rows; r++) {
                 var row = document.createElement("tr");
 
-                for(var c = 0; c < cols; c++) {
-                    var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_"+c);
-                    var text = document.createTextNode(data[cols*r+c]);
-                    cell.appendChild(text);
-                    row.appendChild(cell);
-                }
+                var cell = document.createElement("td");
+                cell.setAttribute("class", "sql_game_name");
+                var text = document.createTextNode(dict[r].name);
+                cell.appendChild(text);
+                row.appendChild(cell);
+
+                var cell = document.createElement("td");
+                cell.setAttribute("class", "sql_game_desc");
+                var text = document.createTextNode(dict[r].description);
+                cell.appendChild(text);
+                row.appendChild(cell);
+
+                var cell = document.createElement("td");
+                cell.setAttribute("class", "sql_game_complexity");
+                var text = document.createTextNode(dict[r].complexity);
+                cell.appendChild(text);
+                row.appendChild(cell);
+
+                var cell = document.createElement("td");
+                cell.setAttribute("class", "sql_game_time");
+                var text = document.createTextNode(dict[r].playTime);
+                cell.appendChild(text);
+                row.appendChild(cell);
+
+                var cell = document.createElement("td");
+                cell.setAttribute("class", "sql_game_players");
+                var text = document.createTextNode(dict[r].numPlayers);
+                cell.appendChild(text);
+                row.appendChild(cell);
+
                 table.appendChild(row);
             }
             div.appendChild(table);
         }
 
-        window.onload = drawTable(4,3, ["Twilight Imperium", "001", "Board Game Closet A", 
-                                        "Twilight Imperium", "002", "Checked Out", 
-                                        "Captain Sonar", "003", "Gordon's Room", 
-                                        "Risk", "004", "Speed Lake"]);
+        var exampleData = {"recordsets":[
+                                            [
+                                                {"name":"game1","description":"test 1","complexity":3,"playTime":"10 hours","numPlayers":5},
+                                                {"name":"game2","description":"test 2","complexity":2,"playTime":"3 hours","numPlayers":2},
+                                                {"name":"game3","description":"test 3","complexity":3,"playTime":"3 hours","numPlayers":3}
+                                            ]
+                                        ],
+                            "recordset":[
+                                            {"name":"game1","description":"test 1","complexity":3,"playTime":"10 hours","numPlayers":5},
+                                            {"name":"game2","description":"test 2","complexity":2,"playTime":"3 hours","numPlayers":2},
+                                            {"name":"game3","description":"test 3","complexity":3,"playTime":"3 hours","numPlayers":3}
+                                        ],
+                            "output":{},
+                            "rowsAffected":[3]}
+        
+        window.onload = drawGameTable(exampleData.rowsAffected[0],exampleData.recordset);
     </script>
 </body>
 </html>
