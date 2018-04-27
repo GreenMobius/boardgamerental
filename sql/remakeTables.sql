@@ -13,12 +13,6 @@ go
 if OBJECT_ID('dbo.BoardGameOfficer', 'U') is not null
 	drop table BoardGameOfficer
 go
-if OBJECT_ID('dbo.Club', 'U') is not null
-	drop table Club
-go
-if OBJECT_ID('dbo.Person', 'U') is not null
-	drop table Person
-go
 if OBJECT_ID('dbo.Suggestion', 'U') is not null
 	drop table Suggestion
 go
@@ -58,19 +52,9 @@ go
 
 create table Borrower(
 	bid int primary key,
-	name varchar(100),
+	rhitUsername varchar(10),
 	address varchar(50),
 	contactNum varchar(12));
-go
-
-create table Person(
-	bid int primary key references Borrower(bid),
-	rhitUsername varchar(10));
-go
-
-create table Club(
-	bid int primary key references Borrower(bid),
-	contactName varchar(100));
 go
 
 create table BoardGameOfficer(
