@@ -66,6 +66,11 @@
         function getGameTable() {
             $.get('/request', function(recordset) {
                 var table = document.getElementById("game_table");
+
+                while (table.firstChild) {
+                    table.removeChild(table.firstChild);
+                }
+
                 var result;
 
                 for(var index in recordset) {
