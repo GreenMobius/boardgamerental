@@ -1,26 +1,113 @@
 <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Rose-Hulman Board Games Club Rental Service</title>
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+
     <body>
-    
-  
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <div id="site_background">
+            <div id="site_panel">
+                <span id="title_section">
+                    <img src="rose.png" alt="RHIT Logo" width="128" height="128" id="img_logo"/>
+                    Rose-Hulman Board Game Rental Service
+                </span>
+                <ul id="top_menu">
+                    <li><a href="" class="menu_item">Home</a></li>
+                    <li><a href="" class="menu_item">Games</a></li>
+                    <li><a href="" class="menu_item">Club</a></li>
+                    <li><a href="" class="menu_item">Help</a></li>
+                </ul>
+                <div id="search">
+                    <span id="search_elements">
+                        <span>
+                            <input id="search_box" type="text" placeholder="Search for a game...">
+                        </span>
+                        <button id="search_button" type="button">
+                            Search
+                        </button>
+                    </span>
+                </div>
+                <div id="table_header" class="sql_head">
+                    <table>
+                        <tr>
+                            <td class="sql_game_name">Name</td>
+                            <td class="sql_game_desc">Description</td>
+                            <td class="sql_game_complexity">Complexity</td>
+                            <td class="sql_game_time">Playtime</td>
+                            <td class="sql_game_players">Max Players</td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="game_table_div" class="sql_table">
+                    <table id="game_table"/>
+                </div>
+            </div>
+        </div>
+
     <script>
-    $(document).ready(function() {
-        $(':button').click(function() {
-            // run an AJAX get request to the route you setup above...
-            // respect the cross-domain policy by using the same domain
-            // you used to access your index.html file!
-			 /* $(":button").css("background-color", "red");*/
-			 $('div.response').html('get good'); // show the list
+        let button = document.getElementById("search_button");
+        button.setAttribute("onclick", "getGameTable()");
+        window.onload = getGameTable();
+ 
+        //$(document).ready(function() {
+        //    $(':button').click(function() {
+        //        $('div.response').html('get good'); // show the list
+        //        $.get('/request', function(recordset) {
+        //            $('div.response').html('bad meme'); // show the list
+        //            console.log(recordset);
+        //            $('div.response').html(recordset); // show the list
+        //        });
+        //         
+        //    });
+        //});
+        
+        function getGameTable() {
             $.get('/request', function(recordset) {
-                $('div.response').html('bad meme'); // show the list
-				console.log(recordset);
-				$('div.response').html(recordset); // show the list
+                var table = document.getElementById("game_table");
+                var result;
+
+                for(var index in recordset) {
+                    result = recordset[index];
+
+                    var row = document.createElement("tr");
+
+                    var cell = document.createElement("td");
+                    cell.setAttribute("class", "sql_game_name");
+                    var text = document.createTextNode(result.name);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    var cell = document.createElement("td");
+                    cell.setAttribute("class", "sql_game_desc");
+                    var text = document.createTextNode(result.description);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    var cell = document.createElement("td");
+                    cell.setAttribute("class", "sql_game_complexity");
+                    var text = document.createTextNode(result.complexity);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    var cell = document.createElement("td");
+                    cell.setAttribute("class", "sql_game_time");
+                    var text = document.createTextNode(result.playTime);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    var cell = document.createElement("td");
+                    cell.setAttribute("class", "sql_game_players");
+                    var text = document.createTextNode(result.numPlayers);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    table.appendChild(row);
+                }
             });
-			
-        });
-    });
+        }
     </script>
-	<button type="button">Get this List</button>
-	<div class="response"> test</div>
-    </body
+
+    </body>
 </html>

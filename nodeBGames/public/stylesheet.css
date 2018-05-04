@@ -1,0 +1,127 @@
+/* Global settings */
+* {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    font-family: fantasy;
+}
+
+html, body {
+    height: 100%;
+}
+
+/* Homepage title */
+#title_section {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Results header row */
+.sql_head {
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 10px;
+    font-weight: bold;
+    width: 100%;
+}
+
+/* Results table */
+.sql_table {
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    width: 100%;
+}
+
+/* Results Column 0 */
+.sql_game_name {
+    width: 150px;
+}
+
+/* Results Column 1 */
+.sql_game_desc {
+    width: 200px;
+}
+
+/* Results Column 2 */
+.sql_game_complexity {
+    width: 100px;
+}
+
+/* Results Column 1 */
+.sql_game_time {
+    width: 125px;
+}
+
+/* Results Column 2 */
+.sql_game_players {
+    width: 100px;
+}
+
+/* Search Box */
+#search {
+    padding: 10px;
+    font-size: 16px;
+    height: 24px;
+}
+
+#search_box {
+    height: 100%;
+}
+
+#search_button {
+    height: 100%;
+    width: 15%;
+}
+
+/* Rose-Hulman Home Page Logo */
+#img_logo {
+    /* Aligns text to center of image */
+    vertical-align: middle;
+}
+
+#top_menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border-left: 3px solid white;
+    height: 33px;
+}
+
+.menu_item {
+    display: block;
+    text-align: center;
+    border-right: 3px solid white;
+    float: left;
+    overflow: hidden;
+    margin-left: 2px;
+    width: 75px;
+    background-color: lightgray;
+}
+
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #800000;
+    color: white;
+}
+
+#site_panel {
+    background-color: white;
+}
+
+#site_background {
+    background-color:lightgray;
+    padding:20px;
+    height:100%;
+}
+
+input {
+    width: 40%;
+}

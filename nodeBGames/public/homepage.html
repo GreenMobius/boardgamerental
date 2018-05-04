@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/T$
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Rose-Hulman Board Games Club Rental Service</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+
+<body>
+    <div id="site_background">
+        <div id="site_panel">
+            <span id="title_section">
+                <img src="rose.png" alt="RHIT Logo" width="128" height="128" id="img_logo"/>
+                Rose-Hulman Board Game Rental Service
+            </span>
+            <ul id="top_menu">
+                <li><a href="index.html" class="menu_item">Home</a></li>
+                <li><a href="index.html" class="menu_item">Games</a></li>
+                <li><a href="index.html" class="menu_item">Club</a></li>
+                <li><a href="index.html" class="menu_item">Help</a></li>
+                <li><script></script></li>
+            </ul>
+            <div id="search">
+                <span id="search_elements">
+                    <span>
+                        <input id="search_box" type="text" placeholder="Search for a game...">
+                    </span>
+                    <button id="search_button" type="button" onclick="alert('Button not implemented.')">
+                        Search
+                    </button>
+                </span>
+            </div>
+            <div id="table_header" class="sql_head">
+                <table>
+                    <tr>
+                        <td class="sql_game_name">Name</td>
+                        <td class="sql_game_desc">Description</td>
+                        <td class="sql_game_complexity">Complexity</td>
+                        <td class="sql_game_time">Playtime</td>
+                        <td class="sql_game_players">Max Players</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="game_table" class="sql_table"/>
+        </div>
+    </div>
+
+    <script>
+        function drawGameTable(rows, dict) {
+            var div = document.getElementById('game_table');
+            var table = document.createElement("table");
+            for(var r = 0; r < rows; r++) {
+                var row = document.createElement("tr");
+
+                var cell = document.createElement("td");
+                cell.setAttribute("class", "sql_game_name");
+                var text = document.createTextNode(dict[r].name);
+                cell.appendChild(text);
+                row.appendChild(cell);
+
+                var cell = document.createElement("td");
+                cell.setAttribute("class", "sql_game_desc");
+                var text = document.createTextNode(dict[r].description);
+                cell.appendChild(text);
+                row.appendChild(cell);
+
+                var cell = document.createElement("td");
+                cell.setAttribute("class", "sql_game_complexity");
+                var text = document.createTextNode(dict[r].complexity);
+                cell.appendChild(text);
+                row.appendChild(cell);
+
+                var cell = document.createElement("td");
+                cell.setAttribute("class", "sql_game_time");
+                var text = document.createTextNode(dict[r].playTime);
+                cell.appendChild(text);
+                row.appendChild(cell);
+
+                var cell = document.createElement("td");
+                cell.setAttribute("class", "sql_game_players");
+                var text = document.createTextNode(dict[r].numPlayers);
+                cell.appendChild(text);
+                row.appendChild(cell);
+
+                table.appendChild(row);
+            }
+            div.appendChild(table);
+        }
+
+        var exampleData = {"recordsets":[
+                                            [
+                                                {"name":"game1","description":"test 1","complexity":3,"playTime":"10 hours","numPlayers":5},
+                                                {"name":"game2","description":"test 2","complexity":2,"playTime":"3 hours","numPlayers":2},
+                                                {"name":"game3","description":"test 3","complexity":3,"playTime":"3 hours","numPlayers":3}
+                                            ]
+                                        ],
+                            "recordset":[
+                                            {"name":"game1","description":"test 1","complexity":3,"playTime":"10 hours","numPlayers":5},
+                                            {"name":"game2","description":"test 2","complexity":2,"playTime":"3 hours","numPlayers":2},
+                                            {"name":"game3","description":"test 3","complexity":3,"playTime":"3 hours","numPlayers":3}
+                                        ],
+                            "output":{},
+                            "rowsAffected":[3]}
+        
+        window.onload = drawGameTable(exampleData.rowsAffected[0],exampleData.recordset);
+    </script>
+</body>
+</html>
