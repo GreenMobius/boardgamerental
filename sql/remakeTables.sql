@@ -51,34 +51,18 @@ create table Copy(
 go
 
 create table Borrower(
-	bid int primary key,
-	rhitUsername varchar(10),
+	username varchar(10) primary key,
 	address varchar(50),
 	contactNum varchar(12));
 go
 
 create table BoardGameOfficer(
-	bid int primary key references Borrower(bid),
+	username varchar(10) primary key references Borrower(username),
 	title varchar(50));
 go
 
-create table Suggestion(
-	sid int primary key,
-	game varchar(100) references Game(name),
-	suggestor int references Borrower(bid),
-	price money);
-go
-
-create table Fee(
-	fid int primary key,
-	amount money,
-	reason varchar(500),
-	paid bit,
-	owedBy int references Borrower(bid));
-go
-
 create table CheckOut(
-	borrower int references Borrower(bid),
+	borrower varchar(10) references Borrower(username),
 	game varchar(100) references Game(name),
 	timeOut date,
 	dueDate date,
@@ -90,5 +74,5 @@ create table Orders(
 	game varchar(100) references Game(name),
 	price money,
 	orderDate date,
-	authorizer int references BoardGameOfficer(bid));
+	authorizer varchar(10) references BoardGameOfficer(username));
 go
