@@ -1,113 +1,47 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Rose-Hulman Board Games Club Rental Service</title>
-        <link rel="stylesheet" type="text/css" href="stylesheet.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    </head>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Rose-Hulman Board Games Club Rental Service</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="rosefire/rosefire.min.js"></script>
+</head>
 
-    <body>
-        <div id="site_background">
-            <div id="site_panel">
+<body>
+<div id="site_background">
+    <div id="site_panel">
                 <span id="title_section">
                     <img src="rose.png" alt="RHIT Logo" width="128" height="128" id="img_logo"/>
                     Rose-Hulman Board Game Rental Service
                 </span>
-                <ul id="top_menu">
-                    <li><a href="" class="menu_item">Home</a></li>
-                    <li><a href="" class="menu_item">Games</a></li>
-                    <li><a href="" class="menu_item">Club</a></li>
-                    <li><a href="" class="menu_item">Help</a></li>
-                </ul>
-                <div id="search">
-                    <span id="search_elements">
-                        <span>
-                            <input id="search_box" type="text" placeholder="Search for a game...">
-                        </span>
-                        <button id="search_button" type="button">
-                            Search
+        <div id="login">
+                    <span id="login_website">
+                        <button id="login_button" type="button">
+                            Login
                         </button>
                     </span>
-                </div>
-                <div id="table_header" class="sql_head">
-                    <table>
-                        <tr>
-                            <td class="sql_game_name">Name</td>
-                            <td class="sql_game_desc">Description</td>
-                            <td class="sql_game_complexity">Complexity</td>
-                            <td class="sql_game_time">Playtime</td>
-                            <td class="sql_game_players">Max Players</td>
-                        </tr>
-                    </table>
-                </div>
-                <div id="game_table_div" class="sql_table">
-                    <table id="game_table"/>
-                </div>
-            </div>
         </div>
-
-    <script>
-        let button = document.getElementById("search_button");
-        button.setAttribute("onclick", "getGameTable()");
-        window.onload = getGameTable();
- 
-        //$(document).ready(function() {
-        //    $(':button').click(function() {
-        //        $('div.response').html('get good'); // show the list
-        //        $.get('/request', function(recordset) {
-        //            $('div.response').html('bad meme'); // show the list
-        //            console.log(recordset);
-        //            $('div.response').html(recordset); // show the list
-        //        });
-        //         
-        //    });
-        //});
-        
-        function getGameTable() {
-            $.get('/request', function(recordset) {
-                var table = document.getElementById("game_table");
-                var result;
-
-                for(var index in recordset) {
-                    result = recordset[index];
-
-                    var row = document.createElement("tr");
-
-                    var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_game_name");
-                    var text = document.createTextNode(result.name);
-                    cell.appendChild(text);
-                    row.appendChild(cell);
-
-                    var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_game_desc");
-                    var text = document.createTextNode(result.description);
-                    cell.appendChild(text);
-                    row.appendChild(cell);
-
-                    var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_game_complexity");
-                    var text = document.createTextNode(result.complexity);
-                    cell.appendChild(text);
-                    row.appendChild(cell);
-
-                    var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_game_time");
-                    var text = document.createTextNode(result.playTime);
-                    cell.appendChild(text);
-                    row.appendChild(cell);
-
-                    var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_game_players");
-                    var text = document.createTextNode(result.numPlayers);
-                    cell.appendChild(text);
-                    row.appendChild(cell);
-
-                    table.appendChild(row);
-                }
-            });
-        }
-    </script>
-
-    </body>
+        <script>
+            let button = document.getElementById("login_button");
+            button.setAttribute("onclick", "login()");
+            // Please note this needs to be the result of a user interaction
+            // (like a button click) otherwise it will get blocked as a popup
+            function login() {
+                Rosefire.signIn("a72ab9c6-42ae-48af-bc56-b01ae532d65f", function(err, rfUser) {
+                    if (err) {
+                        // User not logged in
+                        console.write(err);
+                        return;
+                    } else {
+                        window.location.replace('/home');
+                    }
+                    // Use the token to authenticate with your server
+                    // checkout the server SDKs for more information.
+                });
+            }
+        </script>
+    </div>
+</div>
+</body>
 </html>

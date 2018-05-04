@@ -9,7 +9,7 @@ const config = {
  database: 'BoardGameTracker' 
  };
  
-app.use(express.static(__dirname + '/public')); // exposes index.html, per below
+app.use(express.static(__dirname + '/public')); // exposes homepage.html, per below
 
 app.get('/request', function(req, res) {
 	console.log("Beginning Server Request");
@@ -27,6 +27,10 @@ app.get('/request', function(req, res) {
 	);
 	
 });
+
+app.get('/home', function(req,res) {
+    res.sendFile('homepage.html', {root : __dirname + '/public'});
+})
 
 async function getGames() {
 	console.log("Requesting Games From Server");
