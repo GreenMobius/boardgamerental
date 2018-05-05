@@ -3,8 +3,8 @@ const app = express();
 const sql = require('mssql');
 
 const config = {
- user: 'schmidmj',
- password: 'Rithvik2',
+ user: 'BoardGames38',
+ password: 'TwilightImperium20',
  server: 'golem.csse.rose-hulman.edu', 
  database: 'BoardGameTracker' 
  };
@@ -28,16 +28,54 @@ app.get('/request', function(req, res) {
 	
 });
 
+app.get('/search', function(req, res) {
+	console.log("Beginning search");
+	console.log(req.query.searchTerm);
+	new Promise(
+		function (resolve, reject){
+			resolve(searchGames(req.query.searchTerm));
+		}
+	).then(
+		function (fulfilled){
+			res.json(fulfilled);
+			console.log("completed search request");
+		}
+	);
+
+});
+
 app.get('/home', function(req,res) {
     res.sendFile('homepage.html', {root : __dirname + '/public'});
 })
+
+async function searchGames(searchTerm){
+	console.log("Searching games on server");
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.input('term', sql.VarChar(100), searchTerm)
+			.execute('SearchGame');
+		let toShow = [];
+		for(let x in result.recordset) {
+			toShow.push(result.recordset[x]);
+		}
+		sql.close();
+		console.log("Received Games From Server");
+		return(toShow);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}
 
 async function getGames() {
 	console.log("Requesting Games From Server");
 	try {
 		sql.close();
 		const pool = await sql.connect(config);
-		const result = await pool.request().query('EXECUTE GetGames');
+		const result = await pool.request()
+			.execute('GetGames');
 		let toShow = [];
 		for(let x in result.recordset) {
 			toShow.push(result.recordset[x]);

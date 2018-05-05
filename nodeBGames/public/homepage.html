@@ -48,9 +48,9 @@
 
     <script>
         let button = document.getElementById("search_button");
-        button.setAttribute("onclick", "getGameTable()");
+		let searchBox = document.getElementById("search_box");
+        button.setAttribute("onclick", "searchGames()");
         window.onload = getGameTable();
- 
         //$(document).ready(function() {
         //    $(':button').click(function() {
         //        $('div.response').html('get good'); // show the list
@@ -62,10 +62,34 @@
         //         
         //    });
         //});
+
+
+		//make search box click button on enter
+		searchBox.addEventListener("keyup", function(event) {
+				event.preventDefault();
+				 if (event.keyCode === 13) {
+					button.click();
+				}
+		});
+
+		
+		function searchGames() {
+			var input = searchBox.value;
+			console.log("search");
+			console.log(input);
+			$.get('/search',{searchTerm: input},function(recordset){
+				makeTable(recordset);
+			});
+		}
         
         function getGameTable() {
             $.get('/request', function(recordset) {
-                var table = document.getElementById("game_table");
+                makeTable(recordset);
+            });
+        }
+
+		function makeTable(recordset) {
+			var table = document.getElementById("game_table");
                 while (table.firstChild) {
                     table.removeChild(table.firstChild);
                 }
@@ -107,8 +131,7 @@
 
                     table.appendChild(row);
                 }
-            });
-        }
+		}
     </script>
 
     </body>
