@@ -17,7 +17,7 @@
                     <li><a href="" class="menu_item">Home</a></li>
                     <li><a href="" class="menu_item">Games</a></li>
                     <li><a href="" class="menu_item">Club</a></li>
-                    <li><a href="" type = "button" class="menu_item">Help</a></li>
+                    <li><a href="" class="menu_item">Help</a></li>
                     <button id="profile_button" type="button" class="menu_item">
                             Profile
                     </button>
@@ -25,97 +25,73 @@
                             Check Out
                     </button>
                 </ul>
-                <div id="search">
-                    <span id="search_elements">
-                        <span>
-                            <input id="search_box" type="text" placeholder="Search for a game...">
-                        </span>
-                        <button id="search_button" type="button">
-                            Search
-                        </button>
-                    </span>
-                </div>
                 <div id="table_header" class="sql_head">
                     <table>
                         <tr>
+                            <td class="sql_game_name">Game ID</td>
                             <td class="sql_game_name">Name</td>
                             <td class="sql_game_desc">Description</td>
                             <td class="sql_game_complexity">Complexity</td>
                             <td class="sql_game_time">Playtime</td>
                             <td class="sql_game_players">Max Players</td>
+                            <td class="sql_game_returned">Check Out</td>
                         </tr>
                     </table>
                 </div>
                 <div id="game_table_div" class="sql_table">
                     <table id="game_table"/>
                 </div>
+                <div>
+                    <button id="sendcheckout_button" type="button" class="menu_item">
+                            Confirm Games to Checkout
+                    </button>
+                </div>
             </div>
         </div>
-
     <script>
         let button = document.getElementById("profile_button");
         button.setAttribute("onclick", "goToProfile()");
         button = document.getElementById("checkout_button");
         button.setAttribute("onclick", "goToCheckOut()");
-        button = document.getElementById("search_button");
-		let searchBox = document.getElementById("search_box");
-        button.setAttribute("onclick", "searchGames()");
+        button = document.getElementById("sendcheckout_button");
+        button.setAttribute("onclick", "checkOutItems()");
         window.onload = getGameTable();
-        //$(document).ready(function() {
-        //    $(':button').click(function() {
-        //        $('div.response').html('get good'); // show the list
-        //        $.get('/request', function(recordset) {
-        //            $('div.response').html('bad meme'); // show the list
-        //            console.log(recordset);
-        //            $('div.response').html(recordset); // show the list
-        //        });
-        //         
-        //    });
-        //});
-
-
-		//make search box click button on enter
-		searchBox.addEventListener("keyup", function(event) {
-				event.preventDefault();
-				 if (event.keyCode === 13) {
-					button.click();
-				}
-		});
-
-		
-		function searchGames() {
-			var input = searchBox.value;
-			console.log("search");
-			console.log(input);
-			$.get('/search',{searchTerm: input},function(recordset){
-				makeTable(recordset);
-			});
-		}
 
         function goToProfile() {
-            // $.get('/userCheck',{user: rfUser},function(result){
-            //     console.log(result);
-            // });
-            // console.log("going to profile");
             window.location.replace('/profile');
         }
 
         function goToCheckOut() {
-            // $.get('/userCheck',{user: rfUser},function(result){
-            //     console.log(result);
-            // });
-            // console.log("going to profile");
             window.location.replace('/checkOut');
         }
         
         function getGameTable() {
-            $.get('/request', function(recordset) {
+            $.get('/requestAvailable', function(recordset) {
                 makeTable(recordset);
             });
         }
 
-		function makeTable(recordset) {
-			var table = document.getElementById("game_table");
+        function checkOutItems() {
+            //gets table
+            console.log("checking out");
+            var checkBoxes = document.getElementsByClassName("sql_checkbox");
+            var gids = document.getElementsByClassName("sql_gid");
+            for (var index = 0; index < checkBoxes.length; index++) {
+                console.log(index);
+                console.log(checkBoxes[index].checked);
+                console.log(gids[index].textContent);
+
+                if (checkBoxes[index].checked) {
+
+                    $.get('/addCheckOut',{gid:gids[index].textContent});
+                }
+            }
+
+            //window.location.replace('/profile');
+        }
+
+        function makeTable(recordset) {
+            var table = document.getElementById("game_table");
                 while (table.firstChild) {
                     table.removeChild(table.firstChild);
                 }
@@ -124,6 +100,12 @@
                     result = recordset[index];
 
                     var row = document.createElement("tr");
+
+                    var cell = document.createElement("td");
+                    cell.setAttribute("class", "sql_gid");
+                    var text = document.createTextNode(result.gid);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
 
                     var cell = document.createElement("td");
                     cell.setAttribute("class", "sql_game_name");
@@ -155,10 +137,14 @@
                     cell.appendChild(text);
                     row.appendChild(cell);
 
+                    var cell = document.createElement("INPUT");
+                    cell.type = "checkbox";
+                    cell.setAttribute("class", "sql_checkbox");
+                    row.appendChild(cell);
+
                     table.appendChild(row);
                 }
-		}
-    </script>
-
+            }
+        </script>  
     </body>
 </html>

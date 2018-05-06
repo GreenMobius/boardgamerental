@@ -21,6 +21,9 @@
                     <button id="profile_button" type="button" class="menu_item">
                             Profile
                     </button>
+                    <button id="checkout_button" type="button" class="menu_item">
+                            Check Out
+                    </button>
                 </ul>
                 <div id="table_header" class="sql_head">
                     <table>
@@ -43,18 +46,18 @@
     <script>
         let button = document.getElementById("profile_button");
         button.setAttribute("onclick", "goToProfile()");
+        button = document.getElementById("checkout_button");
+        button.setAttribute("onclick", "goToCheckOut()");
         window.onload = getGameTable();
 
         function goToProfile() {
-            $.get('/userCheck',{user: rfUser},function(result){
-                console.log(result);
-            });
-            window.setTimeout(waitProfile,100);
-        }
-
-        function waitProfile() {
             window.location.replace('/profile');
         }
+
+        function goToCheckOut() {
+            window.location.replace('/checkOut');
+        }
+        
         
         function getGameTable() {
             $.get('/requestProfile', function(recordset) {

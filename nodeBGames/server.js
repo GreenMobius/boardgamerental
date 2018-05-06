@@ -43,6 +43,21 @@ app.get('/requestProfile', function(req, res) {
 	
 });
 
+app.get('/requestAvailable', function(req, res) {
+	console.log("Beginning Server Request");
+	new Promise(
+		function (resolve, reject){
+			resolve(getAvailableGames());
+		}
+	).then(
+		function (fulfilled) {
+			res.json(fulfilled);
+			console.log("Completed Server Request");
+		}
+	);
+	
+});
+
 app.get('/userCheck', function(req, res){
 	console.log("checking user" + req.query.user.username);
 	rhUser = req.query.user;
@@ -74,8 +89,23 @@ app.get('/search', function(req, res) {
 			console.log("completed search request");
 		}
 	);
-
 });
+
+app.get('/addCheckOut', function(req, res) {
+	console.log("Beginning check out");
+	console.log(rhUser.name);
+	new Promise(
+		function (resolve, reject){
+			resolve(addCheckOut(req.query.gid, rhUser.username));
+		}
+	).then(
+		function (fulfilled){
+			res.json(fulfilled);
+			console.log("completed search request");
+		}
+	);
+});
+
 
 app.get('/home', function(req,res) {
     res.sendFile('homepage.html', {root : __dirname + '/public'});
@@ -83,6 +113,10 @@ app.get('/home', function(req,res) {
 
 app.get('/profile', function(req,res) {
     res.sendFile('profile.html', {root : __dirname + '/public'});
+})
+
+app.get('/checkOut', function(req,res) {
+    res.sendFile('checkOut.html', {root : __dirname + '/public'});
 })
 
 //Checks if user exists as borrower, if they don't adds them to borrowers table
@@ -124,6 +158,28 @@ async function searchGames(searchTerm){
 	}
 }
 
+async function addCheckOut(gid, username){
+	console.log("Adding Check Out");
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.input('gid', sql.Int, gid)
+			.input('username', sql.VarChar(10), username)
+			.execute('addNewCheckedOut');
+		let toShow = [];
+		for(let x in result.recordset) {
+			toShow.push(result.recordset[x]);
+		}
+		sql.close();
+		console.log("Added Check Out To Server");
+		return(toShow);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}
+
 async function getGames() {
 	console.log("Requesting Games From Server");
 	try {
@@ -157,7 +213,27 @@ async function getGamesProfile() {
 			toShow.push(result.recordset[x]);
 		}
 		sql.close();
-		console.log("Received " + rhUser.username + " From Server");
+		console.log("Received " + rhUser.username + " Games From Server");
+		return(toShow);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}
+
+async function getAvailableGames() {
+	console.log("Requesting Available Games From Server");
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.execute('getAvailableGames');
+		let toShow = [];
+		for(let x in result.recordset) {
+			toShow.push(result.recordset[x]);
+		}
+		sql.close();
+		console.log("Received Available Games From Server");
 		return(toShow);
 	} catch (err){
 		console.log(err);
