@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const sql = require('mssql');
-
+var rhUser = null; //Stores the current user, see rosefire.min.js for fields
 const config = {
  user: 'BoardGames38',
  password: 'TwilightImperium20',
@@ -28,8 +28,24 @@ app.get('/request', function(req, res) {
 	
 });
 
+app.get('/userCheck', function(req, res){
+	console.log("checking user" + req.query.user.username);
+	rhUser = req.query.user;
+	new Promise(
+		function (resolve, reject){
+			resolve(userCheck(req.query.user.username));
+		}
+	).then(
+		function(fulfilled){
+			res.json(fulfilled);
+			console.log("verified user");
+		}
+	);
+});
+
 app.get('/search', function(req, res) {
 	console.log("Beginning search");
+	console.log(rhUser.name);
 	console.log(req.query.searchTerm);
 	new Promise(
 		function (resolve, reject){
@@ -47,6 +63,24 @@ app.get('/search', function(req, res) {
 app.get('/home', function(req,res) {
     res.sendFile('homepage.html', {root : __dirname + '/public'});
 })
+
+//Checks if user exists as borrower, if they don't adds them to borrowers table
+async function userCheck(user){
+	console.log("checking " + user + " on server");
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.input('username', sql.VarChar(100), user)
+			.execute('userExist');
+		sql.close();
+		console.log("Userexists");
+		return(1);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}
 
 async function searchGames(searchTerm){
 	console.log("Searching games on server");

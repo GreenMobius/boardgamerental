@@ -35,7 +35,15 @@
                         console.write(err);
                         return;
                     } else {
-                        window.location.replace('/home');
+						console.log(rfUser.name); // rockwotj
+						console.log(rfUser.group);
+						console.log(rfUser.email);
+						console.log(rfUser.username);
+						$.get('/userCheck',{user: rfUser},function(result){
+							console.log(result);
+						});
+	
+                       window.location.replace('/home');
                     }
                     // Use the token to authenticate with your server
                     // checkout the server SDKs for more information.
