@@ -22,16 +22,6 @@
                             Profile
                     </button>
                 </ul>
-                <div id="search">
-                    <span id="search_elements">
-                        <span>
-                            <input id="search_box" type="text" placeholder="Search for a game...">
-                        </span>
-                        <button id="search_button" type="button">
-                            Search
-                        </button>
-                    </span>
-                </div>
                 <div id="table_header" class="sql_head">
                     <table>
                         <tr>
@@ -40,6 +30,7 @@
                             <td class="sql_game_complexity">Complexity</td>
                             <td class="sql_game_time">Playtime</td>
                             <td class="sql_game_players">Max Players</td>
+                            <td class="sql_game_returned">Returned</td>
                         </tr>
                     </table>
                 </div>
@@ -52,46 +43,12 @@
     <script>
         let button = document.getElementById("profile_button");
         button.setAttribute("onclick", "goToProfile()");
-        button = document.getElementById("search_button");
-		let searchBox = document.getElementById("search_box");
-        button.setAttribute("onclick", "searchGames()");
         window.onload = getGameTable();
-        //$(document).ready(function() {
-        //    $(':button').click(function() {
-        //        $('div.response').html('get good'); // show the list
-        //        $.get('/request', function(recordset) {
-        //            $('div.response').html('bad meme'); // show the list
-        //            console.log(recordset);
-        //            $('div.response').html(recordset); // show the list
-        //        });
-        //         
-        //    });
-        //});
-
-
-		//make search box click button on enter
-		searchBox.addEventListener("keyup", function(event) {
-				event.preventDefault();
-				 if (event.keyCode === 13) {
-					button.click();
-				}
-		});
-
-		
-		function searchGames() {
-			var input = searchBox.value;
-			console.log("search");
-			console.log(input);
-			$.get('/search',{searchTerm: input},function(recordset){
-				makeTable(recordset);
-			});
-		}
 
         function goToProfile() {
-            // $.get('/userCheck',{user: rfUser},function(result){
-            //     console.log(result);
-            // });
-            // console.log("going to profile");
+            $.get('/userCheck',{user: rfUser},function(result){
+                console.log(result);
+            });
             window.setTimeout(waitProfile,100);
         }
 
@@ -100,7 +57,7 @@
         }
         
         function getGameTable() {
-            $.get('/request', function(recordset) {
+            $.get('/requestProfile', function(recordset) {
                 makeTable(recordset);
             });
         }
@@ -143,6 +100,12 @@
                     var cell = document.createElement("td");
                     cell.setAttribute("class", "sql_game_players");
                     var text = document.createTextNode(result.numPlayers);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    var cell = document.createElement("td");
+                    cell.setAttribute("class", "sql_game_returned");
+                    var text = document.createTextNode(result.returned);
                     cell.appendChild(text);
                     row.appendChild(cell);
 

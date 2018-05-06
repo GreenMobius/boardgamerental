@@ -28,9 +28,26 @@ app.get('/request', function(req, res) {
 	
 });
 
+app.get('/requestProfile', function(req, res) {
+	console.log("Beginning Server Request");
+	new Promise(
+		function (resolve, reject){
+			resolve(getGamesProfile());
+		}
+	).then(
+		function (fulfilled) {
+			res.json(fulfilled);
+			console.log("Completed Server Request");
+		}
+	);
+	
+});
+
 app.get('/userCheck', function(req, res){
 	console.log("checking user" + req.query.user.username);
 	rhUser = req.query.user;
+	console.log(rhUser.name);
+	console.log(rhUser.username);
 	new Promise(
 		function (resolve, reject){
 			resolve(userCheck(req.query.user.username));
@@ -62,6 +79,10 @@ app.get('/search', function(req, res) {
 
 app.get('/home', function(req,res) {
     res.sendFile('homepage.html', {root : __dirname + '/public'});
+})
+
+app.get('/profile', function(req,res) {
+    res.sendFile('profile.html', {root : __dirname + '/public'});
 })
 
 //Checks if user exists as borrower, if they don't adds them to borrowers table
@@ -116,6 +137,27 @@ async function getGames() {
 		}
 		sql.close();
 		console.log("Received Games From Server");
+		return(toShow);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}
+
+async function getGamesProfile() {
+	console.log("Requesting " + rhUser.username + " Games From Server");
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.input('username', sql.VarChar(10), rhUser.username)
+			.execute('getCheckedOutGames');
+		let toShow = [];
+		for(let x in result.recordset) {
+			toShow.push(result.recordset[x]);
+		}
+		sql.close();
+		console.log("Received " + rhUser.username + " From Server");
 		return(toShow);
 	} catch (err){
 		console.log(err);

@@ -35,19 +35,24 @@
                         console.write(err);
                         return;
                     } else {
-						console.log(rfUser.name); // rockwotj
-						console.log(rfUser.group);
-						console.log(rfUser.email);
-						console.log(rfUser.username);
+                    	//console.log('send hep');
+						//console.log(rfUser.name); // rockwotj
+						// console.log(rfUser.group);
+						// console.log(rfUser.email);
+						// console.log(rfUser.username);
 						$.get('/userCheck',{user: rfUser},function(result){
 							console.log(result);
 						});
-	
-                       window.location.replace('/home');
+						window.setTimeout(wait,100);
+                     
                     }
                     // Use the token to authenticate with your server
                     // checkout the server SDKs for more information.
                 });
+            }
+
+            function wait() {
+            	  window.location.replace('/home');
             }
         </script>
     </div>

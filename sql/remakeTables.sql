@@ -63,7 +63,7 @@ go
 
 create table CheckOut(
 	borrower varchar(10) references Borrower(username),
-	game varchar(100) references Game(name),
+	gid int references Copy(gid),
 	timeOut date,
 	dueDate date,
 	returned bit);
