@@ -42,8 +42,9 @@
 						// console.log(rfUser.username);
 						$.get('/userCheck',{user: rfUser},function(result){
 							console.log(result);
+							window.setTimeout(wait,100);
 						});
-						window.setTimeout(wait,100);
+					
                      
                     }
                     // Use the token to authenticate with your server
