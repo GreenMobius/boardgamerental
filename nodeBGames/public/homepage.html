@@ -14,6 +14,7 @@
                     Rose-Hulman Board Game Rental Service
                 </span>
                 <ul id="top_menu">
+<<<<<<< HEAD
                     <li><a type="button" class="menu_item" href="javascript:goToHomepage()">
                             Home
                     </a></li>
@@ -32,6 +33,15 @@
                     <li><a type="button" class="menu_item" href="javascript:goToCheckOut()">
                             Check Out
                     </a></li>
+=======
+                    <li><a href="" class="menu_item">Home</a></li>
+                    <li><a href="" class="menu_item">Games</a></li>
+                    <li><a href="" class="menu_item">Club</a></li>
+                    <li><a href="" class="menu_item">Help</a></li>
+                    <button id="profile_button" type="button" class="menu_item">
+                            Profile
+                    </button>
+>>>>>>> parent of 59c6faf... Added ability to check out games
                 </ul>
                 <div id="search">
                     <span id="search_elements">
@@ -63,7 +73,27 @@
     </body>
     
     <script>
+<<<<<<< HEAD
         window.onload = loadWindow(); //execute blank search on load
+=======
+        let button = document.getElementById("profile_button");
+        button.setAttribute("onclick", "goToProfile()");
+        button = document.getElementById("search_button");
+		let searchBox = document.getElementById("search_box");
+        button.setAttribute("onclick", "searchGames()");
+        window.onload = getGameTable();
+        //$(document).ready(function() {
+        //    $(':button').click(function() {
+        //        $('div.response').html('get good'); // show the list
+        //        $.get('/request', function(recordset) {
+        //            $('div.response').html('bad meme'); // show the list
+        //            console.log(recordset);
+        //            $('div.response').html(recordset); // show the list
+        //        });
+        //         
+        //    });
+        //});
+>>>>>>> parent of 59c6faf... Added ability to check out games
 
         function loadWindow() {
             getGameTable();
@@ -87,15 +117,19 @@
 		}
 
         function goToProfile() {
+<<<<<<< HEAD
             window.location.replace('/profile');
-        }
-
-        function goToCheckOut() {
+=======
             // $.get('/userCheck',{user: rfUser},function(result){
             //     console.log(result);
             // });
             // console.log("going to profile");
-            window.location.replace('/checkOut');
+            window.setTimeout(waitProfile,100);
+>>>>>>> parent of 59c6faf... Added ability to check out games
+        }
+
+        function waitProfile() {
+            window.location.replace('/profile');
         }
         
         function getGameTable() {
