@@ -14,25 +14,33 @@
                     Rose-Hulman Board Game Rental Service
                 </span>
                 <ul id="top_menu">
-                    <li><a href="" class="menu_item">Home</a></li>
-                    <li><a href="" class="menu_item">Games</a></li>
-                    <li><a href="" class="menu_item">Club</a></li>
-                    <li><a href="" type = "button" class="menu_item">Help</a></li>
-                    <button id="profile_button" type="button" class="menu_item">
+                    <li><a type="button" class="menu_item" href="javascript:goToHomepage()">
+                            Home
+                    </a></li>
+                    <li><a type="button" class="menu_item" href="javascript:goToGamepage()">
+                            Games
+                    </a></li>
+                    <li><a type="button" class="menu_item" href="javascript:goToClubpage()">
+                            Club
+                    </a></li>
+                    <li><a type="button" class="menu_item" href="javascript:goToHelppage()">
+                            Help
+                    </a></li>
+                    <li><a type="button" class="menu_item" href="javascript:goToProfile()">
                             Profile
-                    </button>
-                    <button id="checkout_button" type="button" class="menu_item">
+                    </a></li>
+                    <li><a type="button" class="menu_item" href="javascript:goToCheckOut()">
                             Check Out
-                    </button>
+                    </a></li>
                 </ul>
                 <div id="search">
                     <span id="search_elements">
                         <span>
                             <input id="search_box" type="text" placeholder="Search for a game...">
                         </span>
-                        <button id="search_button" type="button">
+                        <a id="search_button" class="menu_item" href="javascript:searchGames()">
                             Search
-                        </button>
+                        </a>
                     </span>
                 </div>
                 <div id="table_header" class="sql_head">
@@ -53,26 +61,7 @@
         </div>
 
     <script>
-        let button = document.getElementById("profile_button");
-        button.setAttribute("onclick", "goToProfile()");
-        button = document.getElementById("checkout_button");
-        button.setAttribute("onclick", "goToCheckOut()");
-        button = document.getElementById("search_button");
-		let searchBox = document.getElementById("search_box");
-        button.setAttribute("onclick", "searchGames()");
-        window.onload = getGameTable();
-        //$(document).ready(function() {
-        //    $(':button').click(function() {
-        //        $('div.response').html('get good'); // show the list
-        //        $.get('/request', function(recordset) {
-        //            $('div.response').html('bad meme'); // show the list
-        //            console.log(recordset);
-        //            $('div.response').html(recordset); // show the list
-        //        });
-        //         
-        //    });
-        //});
-
+        window.onload = getGameTable(); //execute blank search on load
 
 		//make search box click button on enter
 		searchBox.addEventListener("keyup", function(event) {
@@ -82,7 +71,6 @@
 				}
 		});
 
-		
 		function searchGames() {
 			var input = searchBox.value;
 			console.log("search");
@@ -93,10 +81,6 @@
 		}
 
         function goToProfile() {
-            // $.get('/userCheck',{user: rfUser},function(result){
-            //     console.log(result);
-            // });
-            // console.log("going to profile");
             window.location.replace('/profile');
         }
 

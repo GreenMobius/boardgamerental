@@ -14,17 +14,25 @@
                     Rose-Hulman Board Game Rental Service
                 </span>
                 <ul id="top_menu">
-                    <li><a href="" class="menu_item">Home</a></li>
-                    <li><a href="" class="menu_item">Games</a></li>
-                    <li><a href="" class="menu_item">Club</a></li>
-                    <li><a href="" class="menu_item">Help</a></li>
-                    <button id="profile_button" type="button" class="menu_item">
-                            Profile
-                    </button>
-                    <button id="checkout_button" type="button" class="menu_item">
-                            Check Out
-                    </button>
-                </ul>
+                        <li><a type="button" class="menu_item" href="javascript:goToHomepage()">
+                                Home
+                        </a></li>
+                        <li><a type="button" class="menu_item" href="javascript:goToGamepage()">
+                                Games
+                        </a></li>
+                        <li><a type="button" class="menu_item" href="javascript:goToClubpage()">
+                                Club
+                        </a></li>
+                        <li><a type="button" class="menu_item" href="javascript:goToHelppage()">
+                                Help
+                        </a></li>
+                        <li><a type="button" class="menu_item" href="javascript:goToProfile()">
+                                Profile
+                        </a></li>
+                        <li><a type="button" class="menu_item" href="javascript:goToCheckOut()">
+                                Check Out
+                        </a></li>
+                    </ul>
                 <div id="table_header" class="sql_head">
                     <table>
                         <tr>
@@ -44,10 +52,6 @@
         </div>
 
     <script>
-        let button = document.getElementById("profile_button");
-        button.setAttribute("onclick", "goToProfile()");
-        button = document.getElementById("checkout_button");
-        button.setAttribute("onclick", "goToCheckOut()");
         window.onload = getGameTable();
 
         function goToProfile() {
