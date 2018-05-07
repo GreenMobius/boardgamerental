@@ -44,13 +44,14 @@
                     </span>
                 </div>
                 <div id="table_header" class="sql_head">
+                    <!-- ↗ ↘ -->
                     <table>
                         <tr>
-                            <td class="sql_game_name">Name</td>
-                            <td class="sql_game_desc">Description</td>
-                            <td class="sql_game_complexity">Complexity</td>
-                            <td class="sql_game_time">Playtime</td>
-                            <td class="sql_game_players">Max Players</td>
+                                <td class="sql_game_name"><button id="name_head" class="table_header_button" onclick="sortBy(0)">Name</button></td>
+                                <td class="sql_game_desc"><button id="desc_head" class="table_header_button" onclick="sortBy(1)">Description</button></td>
+                                <td class="sql_game_complexity"><button id="complexity_head" class="table_header_button" onclick="sortBy(2)">Complexity</button></td>
+                                <td class="sql_game_time"><button id="time_head" class="table_header_button" onclick="sortBy(3)">Playtime</button></td>
+                                <td class="sql_game_players"><button id="players_head" class="table_header_button" onclick="sortBy(4)">Max Players</button></td>
                         </tr>
                     </table>
                 </div>
@@ -59,9 +60,14 @@
                 </div>
             </div>
         </div>
-
+    </body>
+    
     <script>
-        window.onload = getGameTable(); //execute blank search on load
+        window.onload = loadWindow(); //execute blank search on load
+
+        function loadWindow() {
+            getGameTable();
+        }
 
 		//make search box click button on enter
 		searchBox.addEventListener("keyup", function(event) {
@@ -143,6 +149,4 @@
                 }
 		}
     </script>
-
-    </body>
 </html>
