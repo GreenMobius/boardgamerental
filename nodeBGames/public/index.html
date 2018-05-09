@@ -11,21 +11,17 @@
 <body>
 <div id="site_background">
     <div id="site_panel">
-                <span id="title_section">
-                    <img src="rose.png" alt="RHIT Logo" width="128" height="128" id="img_logo"/>
-                    Rose-Hulman Board Game Rental Service
-                </span>
-        <div id="login">
-                    <span id="login_website">
-                        <button id="login_button" type="button">
-                            Login
-                        </button>
-                    </span>
-        </div>
+        <span id="title_section">
+            <img src="rose.png" alt="RHIT Logo" width="128" height="128" id="img_logo"/>
+            Rose-Hulman Board Game Rental Service
+        </span>
+        <ul id="top_menu" style="padding-bottom:5px;">
+            <li><a type="button" class="menu_item" href="javascript:login()" style="width:40%;">
+                    Login with RoseFire
+            </a></li>
+        </ul>
 
         <script>
-            let button = document.getElementById("login_button");
-            button.setAttribute("onclick", "login()");
             // Please note this needs to be the result of a user interaction
             // (like a button click) otherwise it will get blocked as a popup
             function login() {
