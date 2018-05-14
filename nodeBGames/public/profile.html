@@ -14,7 +14,6 @@
                     Rose-Hulman Board Game Rental Service
                 </span>
                 <ul id="top_menu">
-<<<<<<< HEAD
                         <li><a type="button" class="menu_item" href="javascript:goToHomepage()">
                                 Home
                         </a></li>
@@ -34,16 +33,6 @@
                                 Check Out
                         </a></li>
                     </ul>
-=======
-                    <li><a href="" class="menu_item">Home</a></li>
-                    <li><a href="" class="menu_item">Games</a></li>
-                    <li><a href="" class="menu_item">Club</a></li>
-                    <li><a href="" class="menu_item">Help</a></li>
-                    <button id="profile_button" type="button" class="menu_item">
-                            Profile
-                    </button>
-                </ul>
->>>>>>> parent of 59c6faf... Added ability to check out games
                 <div id="table_header" class="sql_head">
                     <table>
                         <tr>
@@ -63,11 +52,8 @@
         </div>
 
     <script>
-<<<<<<< HEAD
-=======
         let button = document.getElementById("profile_button");
         button.setAttribute("onclick", "goToProfile()");
->>>>>>> parent of 59c6faf... Added ability to check out games
         window.onload = getGameTable();
 
         function goToProfile() {
@@ -75,6 +61,17 @@
                 console.log(result);
             });
             window.setTimeout(waitProfile,100);
+        }
+
+        function goToCheckOut() {
+            $.get('/userCheck',{user: rfUser},function(result){
+                console.log(result);
+            });
+            window.setTimeout(waitProfile,100);
+        }
+
+        function waitCheckOut() {
+            window.location.replace('/checkOut');
         }
 
         function waitProfile() {
