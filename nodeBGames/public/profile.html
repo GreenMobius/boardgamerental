@@ -14,22 +14,22 @@
                     Rose-Hulman Board Game Rental Service
                 </span>
                 <ul id="top_menu">
-                        <li><a type="button" class="menu_item" href="javascript:goToHomepage()">
+                        <li><a type="button" class="menu_item" onclick="javascript:goToHomepage()">
                                 Home
                         </a></li>
-                        <li><a type="button" class="menu_item" href="javascript:goToGamepage()">
+                        <li><a type="button" class="menu_item" onclick="javascript:goToGamepage()">
                                 Games
                         </a></li>
-                        <li><a type="button" class="menu_item" href="javascript:goToClubpage()">
+                        <li><a type="button" class="menu_item" onclick="javascript:goToClubpage()">
                                 Club
                         </a></li>
-                        <li><a type="button" class="menu_item" href="javascript:goToHelppage()">
+                        <li><a type="button" class="menu_item" onclick="javascript:goToHelppage()">
                                 Help
                         </a></li>
-                        <li><a type="button" class="menu_item" href="javascript:goToProfile()">
+                        <li><a type="button" class="menu_item" onclick="javascript:goToProfile()">
                                 Profile
                         </a></li>
-                        <li><a type="button" class="menu_item" href="javascript:goToCheckOut()">
+                        <li><a type="button" class="menu_item" onclick="javascript:goToCheckOut()">
                                 Check Out
                         </a></li>
                     </ul>
@@ -67,7 +67,7 @@
             $.get('/userCheck',{user: rfUser},function(result){
                 console.log(result);
             });
-            window.setTimeout(waitProfile,100);
+            window.setTimeout(waitCheckOut,100);
         }
 
         function waitCheckOut() {
