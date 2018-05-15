@@ -10,6 +10,7 @@
 
 html, body {
     height: 100%;
+    min-width: 675px;
 }
 
 /* Homepage title */
@@ -20,9 +21,9 @@ html, body {
 
 /* Search Box */
 #search {
-    padding: 10px;
-    font-size: 16px;
-    height: 24px;
+    margin: 10px 6px 10px 6px;
+    height: 36px;
+    display: flex;
 }
 
 #search_box {
@@ -42,21 +43,22 @@ html, body {
 
 #top_menu {
     list-style-type: none;
-    padding: 0;
-    margin: 0;
-    border-left: 3px solid white;
-    height: 33px;
+    padding: 0px;
+    margin: 0px;
+    margin-left: 2px;
+    height: 36px;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
 }
 
 .menu_item {
-    display: block;
     text-align: center;
-    border-right: 3px solid white;
-    float: left;
-    overflow: hidden;
-    margin-left: 2px;
-    width: 75px;
     background-color: lightgray;
+    padding-left: 24px;
+    padding-right: 24px;
+    margin-left: 4px;
+    margin-right: 4px;
 }
 
 li a {
@@ -76,7 +78,7 @@ li a:hover {
 }
 
 #site_background {
-    background-color:lightgray;
+    background-color: #800000;
     padding:20px;
     min-height: 100%
 }
@@ -87,14 +89,16 @@ input {
 
 #results_panel {
     width: 100%;
-    background-color: lightgray;
-    padding: 10px;
+    background-color: #800000;
+    padding-top: 10px;
 }
 
 .result_container {
     width: 100%;
     height: 200px;
     padding: 10px;
+    background-color: white;
+    margin-bottom: 10px;
 }
 .result_container:hover {
     background-color: lightgray;
