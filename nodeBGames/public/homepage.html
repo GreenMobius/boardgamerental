@@ -52,6 +52,7 @@
     
     <script>
         window.onload = loadWindow(); //execute blank search on load
+        var searchBox = document.getElementById("search_box");
 
         function loadWindow() {
             getGameTable();
@@ -66,7 +67,6 @@
 		});
 
 		function searchGames() {
-            var searchBox = document.getElementById("search_box");
 			var input = searchBox.value;
 			console.log("search");
 			console.log(input);

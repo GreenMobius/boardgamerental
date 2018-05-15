@@ -78,7 +78,6 @@ li a:hover {
 #site_background {
     background-color:lightgray;
     padding:20px;
-    height:100%;
 }
 
 input {
@@ -97,7 +96,7 @@ input {
     padding: 10px;
 }
 .result_container:hover {
-    background-color: darkgray;
+    background-color: lightgray;
 }
 
 .result_column_left {
