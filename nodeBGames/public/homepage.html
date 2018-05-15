@@ -66,6 +66,7 @@
 		});
 
 		function searchGames() {
+            var searchBox = document.getElementById("search_box");
 			var input = searchBox.value;
 			console.log("search");
 			console.log(input);
@@ -164,7 +165,7 @@
                 detailDiv.appendChild(p);
                 
                 rightCol.appendChild(detailDiv);
-                resutlDiv.appendChild(rightCol);
+                resultDiv.appendChild(rightCol);
                 container.appendChild(resultDiv);
             }
 		}
