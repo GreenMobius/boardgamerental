@@ -43,20 +43,8 @@
                         </a>
                     </span>
                 </div>
-                <div id="table_header" class="sql_head">
-                    <!-- ↗ ↘ -->
-                    <table>
-                        <tr>
-                                <td class="sql_game_name"><button id="name_head" class="table_header_button" onclick="sortBy(0)">Name</button></td>
-                                <td class="sql_game_desc"><button id="desc_head" class="table_header_button" onclick="sortBy(1)">Description</button></td>
-                                <td class="sql_game_complexity"><button id="complexity_head" class="table_header_button" onclick="sortBy(2)">Complexity</button></td>
-                                <td class="sql_game_time"><button id="time_head" class="table_header_button" onclick="sortBy(3)">Playtime</button></td>
-                                <td class="sql_game_players"><button id="players_head" class="table_header_button" onclick="sortBy(4)">Max Players</button></td>
-                        </tr>
-                    </table>
-                </div>
-                <div id="game_table_div" class="sql_table">
-                    <table id="game_table"/>
+                <div id="results_panel">
+                    <div id="results_table" class="results_panel"></div>
                 </div>
             </div>
         </div>
@@ -105,48 +93,75 @@
         }
 
 		function makeTable(recordset) {
-			var table = document.getElementById("game_table");
-                while (table.firstChild) {
-                    table.removeChild(table.firstChild);
-                }
-                var result;
-                for(var index in recordset) {
-                    result = recordset[index];
+            var container = document.getElementById("results_table");
+            
+            while(table.firstChild) {
+                table.removeChild(table.firstChild);
+            }
 
-                    var row = document.createElement("tr");
+            var result, leftCol, rightCol, rowDiv, nameDiv, availableDiv, descriptionDiv, checkOutButton, detailDiv, text, p;
+            for(var index in recordset) {
+                result = recordset[index];
 
-                    var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_game_name");
-                    var text = document.createTextNode(result.name);
-                    cell.appendChild(text);
-                    row.appendChild(cell);
+                leftCol = document.createElement("div");
+                leftCol.setAttribute("class", "result_column_left");
 
-                    var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_game_desc");
-                    var text = document.createTextNode(result.description);
-                    cell.appendChild(text);
-                    row.appendChild(cell);
+                rowDiv = document.createElement("div");
+                rowDiv.setAttribute("class", "result_row_top");
 
-                    var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_game_complexity");
-                    var text = document.createTextNode(result.complexity);
-                    cell.appendChild(text);
-                    row.appendChild(cell);
+                nameDiv = document.createElement("div");
+                nameDiv.setAttribute("class", "result_name");
+                text = document.createTextNode(result.name);
+                nameDiv.appendChild(text);
 
-                    var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_game_time");
-                    var text = document.createTextNode(result.playTime);
-                    cell.appendChild(text);
-                    row.appendChild(cell);
+                availableDiv = document.createElement("div");
+                availableDiv.setAttribute("class", "result_available"); /* make this conditional on availability of copies of game */
+                text = document.createTextNode("Available");
+                availableDiv.appendChild(text);
 
-                    var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_game_players");
-                    var text = document.createTextNode(result.numPlayers);
-                    cell.appendChild(text);
-                    row.appendChild(cell);
+                rowDiv.appendChild(nameDiv);
+                rowDiv.appendChild(availableDiv);
+                leftCol.appendChild(rowDiv);
 
-                    table.appendChild(row);
-                }
+                descriptionDiv = document.createElement("div");
+                descriptionDiv.setAttribute("class", "result_description");
+                text = document.createTextNode(result.description);
+                descriptionDiv.appendChild(text);
+                leftCol.appendChild(descriptionDiv);
+
+                checkOutButton = document.createElement("button");
+                checkOutButton.setAttribute("class", "result_checkout");
+                checkOutButton.setAttribute("onclick", "alert(0)") /* set onclick to check out game */
+                text = document.createTextNode("Check Out");
+                checkOutButton.appendChild(text);
+
+                leftCol.appendChild(checkOutButton);
+                container.appendChild(leftCol);
+
+                rightCol = document.createElement("div");
+                rightCol.setAttribute("class", "result_column_right");
+
+                detailDiv = document.createElement("div");
+                detailDiv.setAttribute("class", "result_details");
+
+                p = document.createElement("p");
+                text = document.createTextNode("Complexity: " + result.complexity);
+                p.appendChild(text);
+                detailDiv.appendChild(p);
+
+                p = document.createElement("p");
+                text = document.createTextNode("Play Time: " + result.playTime);
+                p.appendChild(text);
+                detailDiv.appendChild(p);
+
+                p = document.createElement("p");
+                text = document.createTextNode("Max. Players: " + result.numPlayers);
+                p.appendChild(text);
+                detailDiv.appendChild(p);
+                
+                rightCol.appendChild(detailDiv);
+                container.appendChild(rightCol);
+            }
 		}
     </script>
 </html>

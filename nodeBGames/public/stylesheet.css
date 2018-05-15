@@ -1,8 +1,11 @@
 /* Global settings */
 * {
     margin: 0px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
-    font-family: fantasy;
+    font-family: "Monsanto",sans-serif;
+    padding: 0px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html, body {
@@ -13,50 +16,6 @@ html, body {
 #title_section {
     font-size: 24px;
     font-weight: bold;
-}
-
-/* Results header row */
-.sql_head {
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 10px;
-    font-weight: bold;
-    width: 100%;
-}
-
-/* Results table */
-.sql_table {
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    width: 100%;
-}
-
-/* Results Column 0 */
-.sql_game_name {
-    width: 150px;
-}
-
-/* Results Column 1 */
-.sql_game_desc {
-    width: 200px;
-}
-
-/* Results Column 2 */
-.sql_game_complexity {
-    width: 100px;
-}
-
-/* Results Column 1 */
-.sql_game_time {
-    width: 125px;
-}
-
-/* Results Column 2 */
-.sql_game_players {
-    width: 100px;
 }
 
 /* Search Box */
@@ -124,4 +83,96 @@ li a:hover {
 
 input {
     width: 40%;
+}
+
+#results_panel {
+    width: fit-content;
+    background-color: lightgray;
+    padding: 10px;
+}
+
+.result_container {
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+}
+.result_container:hover {
+    background-color: darkgray;
+}
+
+.result_column_left {
+    float: left;
+    height: 100%;
+    width: 75%;
+    border-right: 2px solid black;
+}
+
+.result_column_right {
+    float: right;
+    height: 100%;
+    width: 25%;
+    padding-left: 12px;
+    padding-top: 6px;
+}
+
+.result_row_top {
+    height: 30%;
+    width: 100%;
+    border-bottom: 2px solid black;
+    vertical-align: middle;
+}
+
+.result_name {
+    font-size: 20px;
+    float: left;
+    width: 75%;
+    height: 100%;
+    padding-left: 12px;
+    padding-top: 15px;
+}
+
+.result_available, .result_unavailable {
+    font-size: 20px;
+    float: left;
+    width: 25%;
+    height: 100%;
+    text-align: center;
+    border-left: 2px solid black;
+    padding-top: 15px;
+}
+
+.result_available {
+    color: green;
+}
+.result_unavailable {
+    color: red;
+}
+
+.result_details {
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    float: left;
+}
+
+.result_description {
+    padding: 12px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.result_checkout {
+    background: none;
+    float: bottom;
+    width: 100px;
+    padding: 2px;
+    margin-right: 10px;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    float: right;
+}
+.result_checkout:hover {
+    background-color: #666666;
+    color: white;
 }
