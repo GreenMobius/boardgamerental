@@ -86,7 +86,7 @@ input {
 }
 
 #results_panel {
-    width: fit-content;
+    width: 100%;
     background-color: lightgray;
     padding: 10px;
 }
@@ -95,6 +95,7 @@ input {
     width: 100%;
     height: 200px;
     padding: 10px;
+    border: 2px solid black;
 }
 .result_container:hover {
     background-color: darkgray;
