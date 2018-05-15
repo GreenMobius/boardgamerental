@@ -69,10 +69,8 @@ create table CheckOut(
 	returned bit);
 go
 
-create table Orders(
-	oid int primary key,
-	game varchar(100) references Game(name),
-	price money,
-	orderDate date,
-	authorizer varchar(10) references BoardGameOfficer(username));
+create table Suggestion(
+	sid int primary key,
+	username varchar(10) references Borrower(username),
+	suggestion varchar(5000));
 go
