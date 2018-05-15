@@ -78,6 +78,7 @@ li a:hover {
 #site_background {
     background-color:lightgray;
     padding:20px;
+    min-height: 100%
 }
 
 input {
