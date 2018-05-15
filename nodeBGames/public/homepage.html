@@ -99,9 +99,12 @@
                 container.removeChild(container.firstChild);
             }
 
-            var result, leftCol, rightCol, rowDiv, nameDiv, availableDiv, descriptionDiv, checkOutButton, detailDiv, text, p;
+            var result, resultDiv, leftCol, rightCol, rowDiv, nameDiv, availableDiv, descriptionDiv, checkOutButton, detailDiv, text, p;
             for(var index in recordset) {
                 result = recordset[index];
+
+                resultDiv = document.createElement("div");
+                resultDiv.setAttribute("class", "result_container");
 
                 leftCol = document.createElement("div");
                 leftCol.setAttribute("class", "result_column_left");
@@ -137,7 +140,7 @@
                 checkOutButton.appendChild(text);
 
                 leftCol.appendChild(checkOutButton);
-                container.appendChild(leftCol);
+                resultDiv.appendChild(leftCol);
 
                 rightCol = document.createElement("div");
                 rightCol.setAttribute("class", "result_column_right");
@@ -161,7 +164,8 @@
                 detailDiv.appendChild(p);
                 
                 rightCol.appendChild(detailDiv);
-                container.appendChild(rightCol);
+                resutlDiv.appendChild(rightCol);
+                container.appendChild(resultDiv);
             }
 		}
     </script>
