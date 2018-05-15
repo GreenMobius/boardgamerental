@@ -95,8 +95,8 @@
 		function makeTable(recordset) {
             var container = document.getElementById("results_table");
             
-            while(table.firstChild) {
-                table.removeChild(table.firstChild);
+            while(container.firstChild) {
+                container.removeChild(container.firstChild);
             }
 
             var result, leftCol, rightCol, rowDiv, nameDiv, availableDiv, descriptionDiv, checkOutButton, detailDiv, text, p;
@@ -112,6 +112,7 @@
                 nameDiv = document.createElement("div");
                 nameDiv.setAttribute("class", "result_name");
                 text = document.createTextNode(result.name);
+                alert(result.name);
                 nameDiv.appendChild(text);
 
                 availableDiv = document.createElement("div");
