@@ -12,24 +12,20 @@ const config = {
 app.use(express.static(__dirname + '/public')); // exposes homepage.html, per below
 
 app.get('/request', function(req, res) {
-	console.log("Beginning Server Request");
 	new Promise(
 		function (resolve, reject){
 			resolve(getGames());
 		}
 	).then(
 		function (fulfilled) {
-			//console.log(JSON.stringify(fulfilled));
-			//res.json('[{"name":"game1","description":"test 1","complexity":3,"playTime":"10 hours","numPlayers":5},{"name":"game2","description":"test 2","complexity":2,"playTime":"3 hours","numPlayers":2},{"name":"game3","description":"test 3","complexity":3,"playTime":"3 hours","numPlayers":3}]');
 			res.json(fulfilled);
-			console.log("Completed Server Request");
+			console.log("User " + req.query.user.username + " requested list of games.");
 		}
 	);
 	
 });
 
 app.get('/requestProfile', function(req, res) {
-	console.log("Beginning Server Request");
 	new Promise(
 		function (resolve, reject){
 			resolve(getGamesProfile());
@@ -37,14 +33,13 @@ app.get('/requestProfile', function(req, res) {
 	).then(
 		function (fulfilled) {
 			res.json(fulfilled);
-			console.log("Completed Server Request");
+			console.log("User " + req.query.user.username + " requested profile.");
 		}
 	);
 	
 });
 
 app.get('/suggestion', function(req, res) {
-	console.log("Beginning Server Request");
 	new Promise(
 		function (resolve, reject){
 			resolve(suggestion(req.query.suggestion));
@@ -52,17 +47,14 @@ app.get('/suggestion', function(req, res) {
 	).then(
 		function (fulfilled) {
 			res.json(fulfilled);
-			console.log("Completed Server Request");
+			console.log("User " + req.query.user.username + " suggested " + req.query.suggestion + ".");
 		}
 	);
 	
 });
 
 app.get('/userCheck', function(req, res){
-	console.log("checking user " + req.query.user.username);
 	rhUser = req.query.user;
-	console.log(rhUser.name);
-	console.log(rhUser.username);
 	new Promise(
 		function (resolve, reject){
 			resolve(userCheck(req.query.user.username));
@@ -70,15 +62,12 @@ app.get('/userCheck', function(req, res){
 	).then(
 		function(fulfilled){
 			res.json(fulfilled);
-			console.log("verified user");
+			console.log("Verified user " + rhUser.username);
 		}
 	);
 });
 
 app.get('/search', function(req, res) {
-	console.log("Beginning search");
-	console.log(rhUser.name);
-	console.log(req.query.searchTerm);
 	new Promise(
 		function (resolve, reject){
 			resolve(searchGames(req.query.searchTerm));
@@ -86,7 +75,7 @@ app.get('/search', function(req, res) {
 	).then(
 		function (fulfilled){
 			res.json(fulfilled);
-			console.log("completed search request");
+			console.log("User " + rhUser.username + " searched for '" + req.query.searchTerm + "'.");
 		}
 	);
 
@@ -105,7 +94,7 @@ app.get('/suggest', function(req,res) {
 })
 
 async function suggestion(suggest){
-	console.log("adding new suggestion for " + rhUser.username);
+	console.log("Adding new suggestion for " + rhUser.username);
 	try {
 		sql.close();
 		const pool = await sql.connect(config);
@@ -114,7 +103,6 @@ async function suggestion(suggest){
 			.input('suggestion', sql.VarChar(5000), suggest)
 			.execute('newSuggestion');
 		sql.close();
-		console.log("Suggestion added");
 		return(1);
 	} catch (err){
 		console.log(err);
@@ -124,7 +112,7 @@ async function suggestion(suggest){
 
 //Checks if user exists as borrower, if they don't adds them to borrowers table
 async function userCheck(user){
-	console.log("checking " + user + " on server");
+	console.log("Verifying " + user + " on server");
 	try {
 		sql.close();
 		const pool = await sql.connect(config);
@@ -132,7 +120,6 @@ async function userCheck(user){
 			.input('username', sql.VarChar(100), user)
 			.execute('userExist');
 		sql.close();
-		console.log("Userexists");
 		return(1);
 	} catch (err){
 		console.log(err);
