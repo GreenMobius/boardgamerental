@@ -47,6 +47,13 @@
         var suggestionBox = document.getElementById("suggestion_box");
         var button = document.getElementById("suggestion_button"); //used to add eventlistener so can hit enter to search
 
+        suggestionBox.addEventListener("keyup", function(event) {
+                event.preventDefault();
+                 if (event.keyCode === 13) {
+                    button.click();
+                }
+        });
+
         function newSuggestion() {
             var input = suggestionBox.value;
             console.log("suggestion");
