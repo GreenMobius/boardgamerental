@@ -49,6 +49,7 @@
     <script>
         window.onload = loadWindow(); //execute blank search on load
         var searchBox = document.getElementById("search_box");
+		var button = document.getElementById("search_button"); //used to add eventlistener so can hit enter to search
 
         function loadWindow() {
             getGameTable();
