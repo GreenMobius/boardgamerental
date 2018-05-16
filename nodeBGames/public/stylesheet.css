@@ -180,3 +180,19 @@ input {
     background-color: #666666;
     color: white;
 }
+
+/* Suggestion Box */
+#suggest {
+    margin: 10px 6px 10px 6px;
+    height: 200px;
+    display: flex;
+}
+
+#suggestion_box {
+    height: 100%;
+}
+
+#suggestion_button {
+    height: 20%;
+    width: 15%;
+}

@@ -43,8 +43,23 @@ app.get('/requestProfile', function(req, res) {
 	
 });
 
+app.get('/suggestion', function(req, res) {
+	console.log("Beginning Server Request");
+	new Promise(
+		function (resolve, reject){
+			resolve(suggestion(req.query.suggestion));
+		}
+	).then(
+		function (fulfilled) {
+			res.json(fulfilled);
+			console.log("Completed Server Request");
+		}
+	);
+	
+});
+
 app.get('/userCheck', function(req, res){
-	console.log("checking user" + req.query.user.username);
+	console.log("checking user " + req.query.user.username);
 	rhUser = req.query.user;
 	console.log(rhUser.name);
 	console.log(rhUser.username);
@@ -84,6 +99,28 @@ app.get('/home', function(req,res) {
 app.get('/profile', function(req,res) {
     res.sendFile('profile.html', {root : __dirname + '/public'});
 })
+
+app.get('/suggest', function(req,res) {
+    res.sendFile('suggest.html', {root : __dirname + '/public'});
+})
+
+async function suggestion(suggest){
+	console.log("adding new suggestion for " + rhUser.username);
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.input('username', sql.VarChar(10), rhUser.username)
+			.input('suggestion', sql.VarChar(5000), suggest)
+			.execute('newSuggestion');
+		sql.close();
+		console.log("Suggestion added");
+		return(1);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}
 
 //Checks if user exists as borrower, if they don't adds them to borrowers table
 async function userCheck(user){

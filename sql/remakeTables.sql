@@ -70,7 +70,7 @@ create table CheckOut(
 go
 
 create table Suggestion(
-	sid int primary key,
+	sid int IDENTITY(0,1) primary key,
 	username varchar(10) references Borrower(username),
 	suggestion varchar(5000));
 go

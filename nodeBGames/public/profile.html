@@ -14,25 +14,25 @@
                     Rose-Hulman Board Game Rental Service
                 </span>
                 <ul id="top_menu">
-                        <li><a type="button" class="menu_item" onclick="javascript:goToHomepage()">
-                                Home
-                        </a></li>
-                        <li><a type="button" class="menu_item" onclick="javascript:goToGamepage()">
-                                Games
-                        </a></li>
-                        <li><a type="button" class="menu_item" onclick="javascript:goToClubpage()">
-                                Club
-                        </a></li>
-                        <li><a type="button" class="menu_item" onclick="javascript:goToHelppage()">
-                                Help
-                        </a></li>
-                        <li><a type="button" class="menu_item" onclick="javascript:goToProfile()">
-                                Profile
-                        </a></li>
-                        <li><a type="button" class="menu_item" onclick="javascript:goToCheckOut()">
-                                Check Out
-                        </a></li>
-                    </ul>
+                    <li><a type="button" class="menu_item" href="javascript:goToHomepage()">
+                            Home
+                    </a></li>
+                    <li><a type="button" class="menu_item" href="javascript:goToGamepage()">
+                            Games
+                    </a></li>
+                    <li><a type="button" class="menu_item" href="javascript:goToClubpage()">
+                            Club
+                    </a></li>
+                    <li><a type="button" class="menu_item" href="javascript:goToHelp()">
+                            Help
+                    </a></li>
+                    <li><a type="button" class="menu_item" href="javascript:goToProfile()">
+                            Profile
+                    </a></li>
+                    <li><a type="button" class="menu_item" href="javascript:goToSuggestion()">
+                            Suggestions
+                    </a></li>
+                </ul>
                 <div id="table_header" class="sql_head">
                     <table>
                         <tr>
@@ -55,30 +55,26 @@
         button.setAttribute("onclick", "goToProfile()");
         window.onload = getGameTable();
 
+        function goToHomepage() {
+            window.setTimeout(function() {
+                                window.location.replace('/home');
+                            },100);
+        }
+
         function goToProfile() {
-            $.get('/userCheck',{user: rfUser},function(result){
-                console.log(result);
-            });
-            window.setTimeout(waitProfile,100);
+            window.setTimeout(function() {
+                                window.location.replace('/profile');
+                            },100);
         }
-
-        function goToCheckOut() {
-            $.get('/userCheck',{user: rfUser},function(result){
-                console.log(result);
-            });
-            window.setTimeout(waitCheckOut,100);
-        }
-
-        function waitCheckOut() {
-            window.location.replace('/checkOut');
-        }
-
-        function waitProfile() {
-            window.location.replace('/profile');
+        
+        function goToSuggestion() {
+            window.setTimeout(function() {
+                                window.location.replace('/suggest');
+                            },100);
         }
         
         function getGameTable() {
-            $.get('/requestProfile', function(recordset) {
+            $.get('/request', function(recordset) {
                 makeTable(recordset);
             });
         }
