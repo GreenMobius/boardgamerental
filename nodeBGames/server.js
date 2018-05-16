@@ -19,7 +19,7 @@ app.get('/request', function(req, res) {
 	).then(
 		function (fulfilled) {
 			res.json(fulfilled);
-			console.log("User " + req.query.user.username + " requested list of games.");
+			console.log("User requested list of games.");
 		}
 	);
 	
@@ -33,7 +33,7 @@ app.get('/requestProfile', function(req, res) {
 	).then(
 		function (fulfilled) {
 			res.json(fulfilled);
-			console.log("User " + req.query.user.username + " requested profile.");
+			console.log("User requested profile.");
 		}
 	);
 	
@@ -47,7 +47,7 @@ app.get('/suggestion', function(req, res) {
 	).then(
 		function (fulfilled) {
 			res.json(fulfilled);
-			console.log("User " + req.query.user.username + " suggested " + req.query.suggestion + ".");
+			console.log("User suggested " + req.query.suggestion + ".");
 		}
 	);
 	
@@ -57,7 +57,7 @@ app.get('/userCheck', function(req, res){
 	rhUser = req.query.user;
 	new Promise(
 		function (resolve, reject){
-			resolve(userCheck(req.query.user.username));
+			resolve(userCheck(rhUser.username));
 		}
 	).then(
 		function(fulfilled){
@@ -75,7 +75,7 @@ app.get('/search', function(req, res) {
 	).then(
 		function (fulfilled){
 			res.json(fulfilled);
-			console.log("User " + rhUser.username + " searched for '" + req.query.searchTerm + "'.");
+			console.log("User searched for '" + req.query.searchTerm + "'.");
 		}
 	);
 
