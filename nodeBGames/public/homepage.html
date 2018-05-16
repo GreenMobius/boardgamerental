@@ -139,14 +139,6 @@
                 }
                 descriptionDiv.appendChild(text);
                 leftCol.appendChild(descriptionDiv);
-
-                checkOutButton = document.createElement("button");
-                checkOutButton.setAttribute("class", "result_checkout");
-                checkOutButton.setAttribute("onclick", "alert(0)") /* set onclick to check out game */
-                text = document.createTextNode("Check Out");
-                checkOutButton.appendChild(text);
-
-                leftCol.appendChild(checkOutButton);
                 resultDiv.appendChild(leftCol);
 
                 rightCol = document.createElement("div");
@@ -171,6 +163,14 @@
                 detailDiv.appendChild(p);
                 
                 rightCol.appendChild(detailDiv);
+
+                checkOutButton = document.createElement("button");
+                checkOutButton.setAttribute("class", "result_checkout");
+                checkOutButton.setAttribute("onclick", "alert(0)") /* set onclick to check out game */
+                text = document.createTextNode("Check Out");
+                checkOutButton.appendChild(text);
+
+                leftCol.appendChild(checkOutButton);
                 resultDiv.appendChild(rightCol);
                 container.appendChild(resultDiv);
                 container.appendChild(document.createElement("hr"));
