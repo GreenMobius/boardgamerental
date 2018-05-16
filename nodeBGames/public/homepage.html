@@ -126,7 +126,11 @@
 
                 descriptionDiv = document.createElement("div");
                 descriptionDiv.setAttribute("class", "result_description");
-                text = document.createTextNode(result.description);
+                if(result.description.length > 250) {
+                    text = document.createTextNode(result.description.substring(0, 250) + " ...")
+                } else {
+                    text = document.createTextNode(result.description);
+                }
                 descriptionDiv.appendChild(text);
                 leftCol.appendChild(descriptionDiv);
 
