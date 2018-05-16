@@ -30,36 +30,14 @@
                             Suggestions
                     </a></li>
                 </ul>
-                <div id="suggest">
-                    <textarea id="suggestion_box" rows="5" cols="50" placeholder="Enter your suggestions..."></textarea>
-                    <a id="suggestion_button" class="menu_item" href="javascript:newSuggestion()">
-                        Enter
-                    </a>
+                <div id="about">
+                    Board Game Club is a club which meets every Friday evening from 7pm to 11pm to play board games. All students are welcome to attend any week, we just ask that students come prepared to play!
                 </div>
             </div>
         </div>
     </body>
     
     <script>
-        var suggestionBox = document.getElementById("suggestion_box");
-        var button = document.getElementById("suggestion_button"); //used to add eventlistener so can hit enter to search
-
-        suggestionBox.addEventListener("keyup", function(event) {
-                event.preventDefault();
-                 if (event.keyCode === 13) {
-                    button.click();
-                }
-        });
-
-        function newSuggestion() {
-            var input = suggestionBox.value;
-            console.log("suggestion");
-            console.log(input);
-            $.get('/suggestion',{suggestion: input});
-            alert("Thank you for your suggestion!");
-            goToHomepage();
-        }
-        
         function goToHomepage() {
             window.setTimeout(function() {
                                 window.location.replace('/home');

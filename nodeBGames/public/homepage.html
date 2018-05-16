@@ -17,10 +17,7 @@
                     <li><a type="button" class="menu_item" href="javascript:goToHomepage()">
                             Home
                     </a></li>
-                    <li><a type="button" class="menu_item unimplemented" href="javascript:goToGamepage()">
-                            Games
-                    </a></li>
-                    <li><a type="button" class="menu_item unimplemented" href="javascript:goToClubpage()">
+                    <li><a type="button" class="menu_item" href="javascript:goToClubpage()">
                             Club
                     </a></li>
                     <li><a type="button" class="menu_item unimplemented" href="javascript:goToHelp()">
@@ -75,6 +72,12 @@
         function goToHomepage() {
             window.setTimeout(function() {
                                 window.location.replace('/home');
+                            },100);
+        }
+
+        function goToClubpage() {
+            window.setTimeout(function() {
+                                window.location.replace('/club');
                             },100);
         }
 

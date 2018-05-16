@@ -85,6 +85,10 @@ app.get('/home', function(req,res) {
     res.sendFile('homepage.html', {root : __dirname + '/public'});
 })
 
+app.get('/club', function(req,res) {
+    res.sendFile('club.html', {root : __dirname + '/public'});
+})
+
 app.get('/profile', function(req,res) {
     res.sendFile('profile.html', {root : __dirname + '/public'});
 })
