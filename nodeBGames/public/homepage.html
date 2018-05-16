@@ -71,20 +71,23 @@
 				makeTable(recordset);
 			});
 		}
+        
+        function goToHomepage() {
+            window.setTimeout(function() {
+                                window.location.replace('/home');
+                            },100);
+        }
 
         function goToProfile() {
-            window.setTimeout(waitProfile(),100);
+            window.setTimeout(function() {
+                                window.location.replace('/profile');
+                            },100);
         }
         
         function goToCheckOut() {
-            window.setTimeout(waitCheckOut(),100);
-        }
-        function waitCheckOut() {
-            window.location.replace('/checkOut');
-        }
-
-        function waitProfile() {
-            window.location.replace('/profile');
+            window.setTimeout(function() {
+                                window.location.replace('/checkOut');
+                            },100);
         }
         
         function getGameTable() {
