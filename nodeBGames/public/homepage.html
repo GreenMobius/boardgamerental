@@ -167,6 +167,8 @@
                 checkOutButton = document.createElement("button");
                 checkOutButton.setAttribute("class", "result_checkout");
                 checkOutButton.setAttribute("onclick", "alert(0)") /* set onclick to check out game */
+                text = document.createTextNode("View Copy Information");
+                checkOutButton.appendChild(text);
                 text = document.createTextNode("Check Out");
                 checkOutButton.appendChild(text);
 

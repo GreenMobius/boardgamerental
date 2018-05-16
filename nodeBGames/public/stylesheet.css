@@ -166,14 +166,13 @@ input {
 
 .result_checkout {
     background: none;
-    float: bottom;
-    width: 100px;
+    width: 100%;
+    height: 80px;
     padding: 2px;
     margin-right: 10px;
     font: inherit;
     cursor: pointer;
     outline: inherit;
-    float: right;
 }
 .result_checkout:hover {
     background-color: #666666;
