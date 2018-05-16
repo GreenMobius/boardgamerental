@@ -22,17 +22,12 @@ html, body {
 /* Search Box */
 #search {
     margin: 10px 6px 10px 6px;
-    height: 36px;
+    height: 32px;
     display: flex;
 }
 
 #search_box {
     height: 100%;
-}
-
-#search_button {
-    height: 100%;
-    width: 15%;
 }
 
 /* Rose-Hulman Home Page Logo */
@@ -65,14 +60,14 @@ html, body {
     margin-right: 4px;
 }
 
-li a {
+a {
     display: block;
     color: #000;
     padding: 8px 16px;
     text-decoration: none;
 }
 
-li a:hover {
+a:hover {
     background-color: #800000;
     color: white;
 }
