@@ -52,6 +52,10 @@ html, body {
     align-items: flex-start;
 }
 
+.unimplemented {
+    cursor: not-allowed;
+}
+
 .menu_item {
     text-align: center;
     background-color: lightgray;
