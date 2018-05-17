@@ -47,6 +47,14 @@ html, body {
     align-items: flex-start;
 }
 
+.small_text {
+    font-size: 12px;
+}
+
+.large_text {
+    font-size: 24px;
+}
+
 .unimplemented {
     cursor: not-allowed;
 }

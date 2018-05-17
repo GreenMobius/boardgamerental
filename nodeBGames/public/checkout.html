@@ -67,13 +67,15 @@
         }
         
         function gameInfo() {
-            $.get('/findGame',function(recordset){
+            $.get('/findGame', function(recordset){
                 var div = document.getElementById("game_info");
                 var element = document.createTextNode(recordset[0].name);
+                element.setAttribute("class", "medium_text");
                 div.appendChild(element);
                 element = document.createElement("br");
                 div.appendChild(element);
                 element = document.createTextNode(recordset[0].description);
+                element.setAttribute("class", "small_text");
                 div.appendChild(element);
 			});
         }
