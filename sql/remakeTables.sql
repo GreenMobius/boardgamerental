@@ -45,7 +45,7 @@ create table Location(
 go
 
 create table Copy(
-	gid int primary key,
+	gid int identity(0,1) primary key,
 	copyOf varchar(100) references Game(name),
 	location int references Location(lid));
 go
