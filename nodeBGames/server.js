@@ -114,6 +114,10 @@ app.get('/help', function(req,res) {
     res.sendFile('help.html', {root : __dirname + '/public'});
 })
 
+app.get('/login', function(req,res) {
+    res.sendFile('index.html', {root : __dirname + '/public'});
+})
+
 async function suggestion(suggest){
 	console.log("Adding new suggestion for " + rhUser.username);
 	try {
@@ -193,7 +197,14 @@ async function getGames() {
 }
 
 async function getGamesProfile() {
-	console.log("Requesting " + rhUser.username + " Games From Server");
+	try {
+		console.log("Requesting " + rhUser.username + " Games From Server");
+	} catch(err) {
+		window.alert("Please log in to view your profile.");
+		window.setTimeout(function() {
+			window.location.replace('/index');
+		},100);
+	}
 	try {
 		sql.close();
 		const pool = await sql.connect(config);
