@@ -63,15 +63,22 @@
         
         function gameInfo() {
             $.get('/findGame', function(recordset){
-                var div = document.getElementById("game_info");
+                var outerDiv = document.getElementById("game_info");
+
+                var innerDiv = document.createElement("div");
+                innerDiv.setAttribute("class", "medium_text");
                 var element = document.createTextNode(recordset[0].name);
-                element.setAttribute("class", "medium_text");
-                div.appendChild(element);
+                innerDiv.appendChild(element);
+                outerDiv.appendChild(innerDiv);
+
                 element = document.createElement("hr");
-                div.appendChild(element);
+                outerDiv.appendChild(element);
+
+                innerDiv = document.createElement("div");
+                innerDiv.setAttribute("class", "small_text");
                 element = document.createTextNode(recordset[0].description);
-                element.setAttribute("class", "small_text");
-                div.appendChild(element);
+                innerDiv.appendChild(element);
+                outerDiv.appendChild(innerDiv);
                 getCopies();
             });
         }
