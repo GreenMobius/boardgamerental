@@ -110,6 +110,10 @@ app.get('/suggest', function(req,res) {
     res.sendFile('suggest.html', {root : __dirname + '/public'});
 })
 
+app.get('/help', function(req,res) {
+    res.sendFile('help.html', {root : __dirname + '/public'});
+})
+
 async function suggestion(suggest){
 	console.log("Adding new suggestion for " + rhUser.username);
 	try {
