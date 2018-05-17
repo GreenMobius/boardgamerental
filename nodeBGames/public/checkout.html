@@ -48,7 +48,12 @@
         </div>
 
     <script>
-        window.onload = getCopies();
+        window.onload = setup();
+
+        function setup() {
+            gameInfo();
+            getCopies();
+        }
         
      	function getCopies() {
 			console.log("copies");
@@ -56,7 +61,13 @@
 				console.log(recordset);
 				makeTable(recordset);
 			});
-		}
+        }
+        
+        function gameInfo() {
+            $.get('/findGame',function(recordset){
+				console.log(recordset);
+			});
+        }
 
 		function checkout(game) {
 			console.log("gid");
@@ -94,18 +105,18 @@
                     cell.appendChild(text);
                     row.appendChild(cell);
                     
+                    cell = document.createElement("td");
+                    cell.setAttribute("class", "table_element_short");
+
                     if(result.location == 0){
-                        cell = document.createElement("td");
-                        cell.setAttribute("class", "table_element_short");
                         button = document.createElement("button");
                         button.setAttribute("class", "menu_item");
                         text = document.createTextNode("Check Out");
                         button.setAttribute("onclick", "checkout(" + result.gid + ");"); /* set onclick to check out game */
                         button.appendChild(text);
                         cell.appendChild(button);
-                        row.appendChild(cell);
                     }
-
+                    row.appendChild(cell);
                     table.appendChild(row);
                 }
 		}

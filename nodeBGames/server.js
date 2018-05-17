@@ -113,6 +113,22 @@ app.get('/getCopies', function(req,res) {
 	);
 });
 
+app.get('/findGame', function(req, res){
+	console.log("getting copies of");
+	console.log(game);
+	var input = game;
+	new Promise(
+		function (resolve, reject){
+			resolve(searchGames(input));
+		}
+	).then(
+		function (fulfilled){
+			res.json(fulfilled);
+			console.log("Got the current game");
+		}
+	);
+})
+
 app.get('/setGame', function(req,res) {
 	game = req.query.name;
 	console.log(game);
