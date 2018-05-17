@@ -121,13 +121,12 @@
                 nameDiv.appendChild(text);
 
                 availableDiv = document.createElement("div");
-                availableDiv.setAttribute("class", "result_available");
                 if (result.available > 0) {
-                    availableDiv.setAttribute("class", "green") /* make this conditional on availability of copies of game */
+                    availableDiv.setAttribute("class", "result_available green") /* make this conditional on availability of copies of game */
                     text = document.createTextNode("Available");
                 }
                 else {
-                    availableDiv.setAttribute("class", "red") /* make this conditional on availability of copies of game */
+                    availableDiv.setAttribute("class", "result_available red") /* make this conditional on availability of copies of game */
                     text = document.createTextNode("Not Available");
                 }
                 availableDiv.appendChild(text);
