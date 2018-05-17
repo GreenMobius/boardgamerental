@@ -86,20 +86,25 @@
 
                     cell = document.createElement("td");
                     cell.setAttribute("class", "table_element_medium");
-                    text = document.createTextNode(result.copyOf);
+                    if(result.location == 0){
+						  text = document.createTextNode('Available');
+					} else {
+					  text = document.createTextNode('Checked Out');
+					}
                     cell.appendChild(text);
                     row.appendChild(cell);
-
-                    cell = document.createElement("td");
-                    cell.setAttribute("class", "table_element_short");
-                    button = document.createElement("button");
-                    button.setAttribute("class", "menu_item");
-                    text = document.createTextNode("Check Out");
-                    button.setAttribute("onclick", "checkout(" + result.gid + ");"); /* set onclick to check out game */
                     
-                    button.appendChild(text);
-                    cell.appendChild(button);
-                    row.appendChild(cell);
+                    if(result.location == 0){
+                        cell = document.createElement("td");
+                        cell.setAttribute("class", "table_element_short");
+                        button = document.createElement("button");
+                        button.setAttribute("class", "menu_item");
+                        text = document.createTextNode("Check Out");
+                        button.setAttribute("onclick", "checkout(" + result.gid + ");"); /* set onclick to check out game */
+                        button.appendChild(text);
+                        cell.appendChild(button);
+                        row.appendChild(cell);
+                    }
 
                     table.appendChild(row);
                 }
