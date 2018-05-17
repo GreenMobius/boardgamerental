@@ -31,6 +31,9 @@
                             Suggestions
                     </a></li>
                 </ul>
+                <div class="content_panel full_width">
+                    <div id="game_info" class="content full_width"/>
+                </div>
                 <div class="content_panel">
                     <div id="table_header" class="full_width content">
                         <table class="full_width">
@@ -65,8 +68,10 @@
         
         function gameInfo() {
             $.get('/findGame',function(recordset){
-                console.log("hello game info");
-				console.log(recordset);
+                var div = document.getElementById("game_info");
+                div.appendChild(document.createTextNode(recordset[0].name));
+                div.appendChild(document.createElement("br"));
+                div.appendChild(document.createTextNode(recordset[0].description));
 			});
         }
 
