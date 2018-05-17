@@ -192,6 +192,26 @@ input {
     color: white;
 }
 
+.full_width {
+    width: 100%;
+}
+
+#table_header {
+    border-bottom: 2px solid black;
+}
+
+.table_element_short {
+    width: 10%;
+}
+
+.table_element_date {
+    width: 20%;
+}
+
+.table_element_long {
+    width: 40%;
+}
+
 /* Suggestion Box */
 #suggest {
     margin: 10px 6px 10px 6px;

@@ -31,19 +31,21 @@
                             Suggestions
                     </a></li>
                 </ul>
-                <div id="table_header" class="sql_head">
-                    <table>
-                        <tr>
-                            <td>Copy ID</td>
-                            <td>Name</td>
-                            <td>Borrow Date</td>
-                            <td>Due Date</td>
-                            <td>Returned</td>
-                        </tr>
-                    </table>
-                </div>
-                <div id="game_table_div" class="sql_table">
-                    <table id="game_table"/>
+                <div class="content_panel">
+                    <div id="table_header" class="full_width content">
+                        <table class="full_width">
+                            <tr class="full_width">
+                                <td class="table_element_short">Copy ID</td>
+                                <td class="table_element_long">Name</td>
+                                <td class="table_element_date">Borrow Date</td>
+                                <td class="table_element_date">Due Date</td>
+                                <td class="table_element_short">Returned</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="game_table_div" class="sql_table content full_width">
+                        <table id="game_table"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -71,31 +73,31 @@
                     var row = document.createElement("tr");
 
                     var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_gid");
+                    cell.setAttribute("class", "table_element_short");
                     var text = document.createTextNode(result.gid);
                     cell.appendChild(text);
                     row.appendChild(cell);
 
                     var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_copyOf");
+                    cell.setAttribute("class", "table_element_long");
                     var text = document.createTextNode(result.copyOf);
                     cell.appendChild(text);
                     row.appendChild(cell);
 
                     var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_timeOut");
+                    cell.setAttribute("class", "table_element_date");
                     var text = document.createTextNode((result.timeOut).substring(0,10));
                     cell.appendChild(text);
                     row.appendChild(cell);
 
                     var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_dueDate");
+                    cell.setAttribute("class", "table_element_date");
                     var text = document.createTextNode((result.dueDate).substring(0,10));
                     cell.appendChild(text);
                     row.appendChild(cell);
 
                     var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_game_returned");
+                    cell.setAttribute("class", "table_element_short");
                     var text = document.createTextNode(result.returned);
                     cell.appendChild(text);
                     row.appendChild(cell);
