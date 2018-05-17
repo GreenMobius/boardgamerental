@@ -44,7 +44,7 @@
                         </table>
                     </div>
                     <div id="game_table_div" class="sql_table content full_width">
-                        <table id="game_table"/>
+                        <table id="game_table" class="full_width"/>
                     </div>
                 </div>
             </div>
@@ -71,6 +71,7 @@
                     result = recordset[index];
 
                     var row = document.createElement("tr");
+                    row.setAttribute("class", "full_width");
 
                     var cell = document.createElement("td");
                     cell.setAttribute("class", "table_element_short");
