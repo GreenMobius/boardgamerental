@@ -68,6 +68,14 @@
 				makeTable(recordset);
 			});
 		}
+		
+		function getCopies() {
+			var input;  //Need to set this some how
+			console.log("copies");
+			$.get('/getCopies',{searchTerm: input},function(recordset){
+				console.log(recordset);
+			});
+		}
         
         function goToHomepage() {
             window.setTimeout(function() {

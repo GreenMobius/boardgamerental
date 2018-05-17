@@ -81,6 +81,19 @@ app.get('/search', function(req, res) {
 
 });
 
+app.get('/getCopies', function(req,res) {
+	new Promise(
+		function (resolve, reject){
+			resolve(getCopies(req.query.searchTerm));
+		}
+	).then(
+		function(fulfilled){
+			res.json(fulfilled);
+			console.log("Copies have been returned for " + req.query.searchTerm);
+		}
+	);
+});
+
 app.get('/home', function(req,res) {
     res.sendFile('homepage.html', {root : __dirname + '/public'});
 })
@@ -192,6 +205,25 @@ async function getGamesProfile() {
 		sql.close();
 	}
 }
+
+async function getCopies(searchTerm) {
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.input('name', sql.VarChar(100), searchTerm)
+			.execute('getCopies');
+		let toShow = [];
+		for(let x in result.recordset) {
+			toShow.push(result.recordset[x]);
+		}
+		sql.close();
+		return(toShow);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}	
 
 var server = app.listen(80, function () {
  console.log('Server Running on Port 80');
