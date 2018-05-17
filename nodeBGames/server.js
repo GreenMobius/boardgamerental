@@ -149,6 +149,9 @@ async function userCheck(user){
 }
 
 async function searchGames(searchTerm){
+	if(searchTerm == "Taylor" || searchTerm == "taylor") {
+		searchTerm = "Captain Sonar"
+	}
 	console.log("Searching games on server");
 	try {
 		sql.close();
