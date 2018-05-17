@@ -204,12 +204,12 @@ input {
     width: 10%;
 }
 
-.table_element_date {
+.table_element_medium {
     width: 20%;
 }
 
 .table_element_long {
-    width: 40%;
+    width: 30%;
 }
 
 /* Suggestion Box */

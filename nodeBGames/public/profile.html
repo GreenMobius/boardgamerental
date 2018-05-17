@@ -86,19 +86,19 @@
                     row.appendChild(cell);
 
                     cell = document.createElement("td");
-                    cell.setAttribute("class", "table_element_date");
+                    cell.setAttribute("class", "table_element_medium");
                     text = document.createTextNode((result.timeOut).substring(0,10));
                     cell.appendChild(text);
                     row.appendChild(cell);
 
                     cell = document.createElement("td");
-                    cell.setAttribute("class", "table_element_date");
+                    cell.setAttribute("class", "table_element_medium");
                     text = document.createTextNode((result.dueDate).substring(0,10));
                     cell.appendChild(text);
                     row.appendChild(cell);
 
                     cell = document.createElement("td");
-                    cell.setAttribute("class", "table_element_short");
+                    cell.setAttribute("class", "table_element_medium");
                     text = result.returned + "";
                     if(text == "false") {
                         text = "Checked Out";
