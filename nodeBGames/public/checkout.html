@@ -51,12 +51,7 @@
         </div>
 
     <script>
-        window.onload = setup();
-
-        function setup() {
-            gameInfo();
-            getCopies();
-        }
+        window.onload = gameInfo();
         
      	function getCopies() {
 			console.log("copies");
@@ -77,7 +72,8 @@
                 element = document.createTextNode(recordset[0].description);
                 element.setAttribute("class", "small_text");
                 div.appendChild(element);
-			});
+                getCopies();
+            });
         }
 
 		function checkout(game) {
