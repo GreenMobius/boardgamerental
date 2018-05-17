@@ -69,9 +69,12 @@
         function gameInfo() {
             $.get('/findGame',function(recordset){
                 var div = document.getElementById("game_info");
-                div.appendChild(document.createTextNode(recordset[0].name));
-                div.appendChild(document.createElement("br"));
-                div.appendChild(document.createTextNode(recordset[0].description));
+                var element = document.createTextNode(recordset[0].name);
+                div.appendChild(element);
+                element = document.createElement("br");
+                div.appendChild(element);
+                element = document.createTextNode(recordset[0].description);
+                div.appendChild(element);
 			});
         }
 
