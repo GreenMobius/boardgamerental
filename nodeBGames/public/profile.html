@@ -66,45 +66,47 @@
                 while (table.firstChild) {
                     table.removeChild(table.firstChild);
                 }
-                var result;
+                var result, row, cell, text;
                 for(var index in recordset) {
                     result = recordset[index];
 
-                    var row = document.createElement("tr");
+                    row = document.createElement("tr");
                     row.setAttribute("class", "full_width");
 
-                    var cell = document.createElement("td");
+                    cell = document.createElement("td");
                     cell.setAttribute("class", "table_element_short");
-                    var text = document.createTextNode(result.gid);
+                    text = document.createTextNode(result.gid);
                     cell.appendChild(text);
                     row.appendChild(cell);
 
-                    var cell = document.createElement("td");
+                    cell = document.createElement("td");
                     cell.setAttribute("class", "table_element_long");
-                    var text = document.createTextNode(result.copyOf);
+                    text = document.createTextNode(result.copyOf);
                     cell.appendChild(text);
                     row.appendChild(cell);
 
-                    var cell = document.createElement("td");
+                    cell = document.createElement("td");
                     cell.setAttribute("class", "table_element_date");
-                    var text = document.createTextNode((result.timeOut).substring(0,10));
+                    text = document.createTextNode((result.timeOut).substring(0,10));
                     cell.appendChild(text);
                     row.appendChild(cell);
 
-                    var cell = document.createElement("td");
+                    cell = document.createElement("td");
                     cell.setAttribute("class", "table_element_date");
-                    var text = document.createTextNode((result.dueDate).substring(0,10));
+                    text = document.createTextNode((result.dueDate).substring(0,10));
                     cell.appendChild(text);
                     row.appendChild(cell);
 
-                    var cell = document.createElement("td");
+                    cell = document.createElement("td");
                     cell.setAttribute("class", "table_element_short");
-                    var text = document.createTextNode(result.returned);
+                    text = result.returned;
                     if(text == "false") {
                         text = "Checked Out"
-                    } else {
+                    }
+                    if(text == "true") {
                         text = "Returned"
                     }
+                    text = document.createTextNode(text);
                     cell.appendChild(text);
                     row.appendChild(cell);
 
