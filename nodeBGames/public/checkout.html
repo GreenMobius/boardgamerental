@@ -58,6 +58,13 @@
 			});
 		}
 
+		function checkout(game) {
+			console.log("gid");
+			var input = game;
+		 $.get('/checkOutGame', {gid: input});
+		 alert("Checked out!");
+		}
+
 		function makeTable(recordset) {
 			console.log(recordset);
 			var table = document.getElementById("game_table");
@@ -88,6 +95,7 @@
                     button = document.createElement("button");
                     button.setAttribute("class", "menu_item");
                     text = document.createTextNode("Check Out");
+                    button.setAttribute("onclick", "checkout(" + result.gid + ");"); /* set onclick to check out game */
                     
                     button.appendChild(text);
                     cell.appendChild(button);

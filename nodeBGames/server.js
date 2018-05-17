@@ -82,6 +82,20 @@ app.get('/search', function(req, res) {
 
 });
 
+app.get('/checkOutGame', function(req, res) {
+	new Promise(
+		function (resolve, reject){
+			resolve(checkOutGame(req.query.gid));
+		}
+	).then(
+		function (fulfilled){
+			res.json(fulfilled);
+			console.log("User checked out gid " + req.query.gid + " .");
+		}
+	);
+
+});
+
 app.get('/getCopies', function(req,res) {
 	console.log("getting copies of");
 	console.log(game);
@@ -141,6 +155,23 @@ async function suggestion(suggest){
 			.input('username', sql.VarChar(10), rhUser.username)
 			.input('suggestion', sql.VarChar(5000), suggest)
 			.execute('newSuggestion');
+		sql.close();
+		return(1);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}
+
+async function checkOutGame(gid){
+	console.log("Checking out game " + gid);
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.input('username', sql.VarChar(10), rhUser.username)
+			.input('gid', sql.Int, gid)
+			.execute('addNewCheckedOut');
 		sql.close();
 		return(1);
 	} catch (err){
