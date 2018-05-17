@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const sql = require('mssql');
 var rhUser = null; //Stores the current user, see rosefire.min.js for fields
+var game = null;
 const config = {
  user: 'BoardGames38',
  password: 'TwilightImperium20',
@@ -82,17 +83,30 @@ app.get('/search', function(req, res) {
 });
 
 app.get('/getCopies', function(req,res) {
+	console.log("getting copies of");
+	console.log(game);
+	var input = game;
 	new Promise(
 		function (resolve, reject){
-			resolve(getCopies(req.query.searchTerm));
+			resolve(getCopies(input));
 		}
 	).then(
 		function(fulfilled){
 			res.json(fulfilled);
-			console.log("Copies have been returned for " + req.query.searchTerm);
+			
+			console.log("Copies have been returned for " + game);
 		}
 	);
 });
+
+app.get('/setGame', function(req,res) {
+	game = req.query.name;
+	console.log(game);
+	res.json("done");
+})
+app.get('/checkout', function(req,res) {
+    res.sendFile('checkout.html', {root : __dirname + '/public'});
+})
 
 app.get('/home', function(req,res) {
     res.sendFile('homepage.html', {root : __dirname + '/public'});

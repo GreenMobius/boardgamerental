@@ -77,6 +77,17 @@
 				console.log(recordset);
 			});
 		}
+		function goToCheckout(game) {
+			console.log("test");
+			var input = game;
+		 $.get('/setGame', {name: input}, function(recordset) {
+				window.setTimeout(changePage,200);
+            });
+		}
+		function changePage() {
+            window.location.replace('/checkout');
+        }
+
         
         function getGameTable() {
             $.get('/request', function(recordset) {
@@ -155,7 +166,7 @@
                 checkOutButton = document.createElement("button");
                 checkOutButton.setAttribute("class", "result_checkout");
                 
-                checkOutButton.setAttribute("onclick", "alert(\"" + result.name + "\");"); /* set onclick to check out game */
+                checkOutButton.setAttribute("onclick", "goToCheckout(\""+ result.name  + "\");"); /* set onclick to check out game */
                 
                 p = document.createElement("p");
                 text = document.createTextNode("View Copy Information");

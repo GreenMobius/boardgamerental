@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Rose-Hulman Board Games Club Rental Service</title>
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="menu.js"></script>
+    </head>
+
+    <body>
+        <div id="site_background">
+            <div id="site_panel">
+                <span id="title_section">
+                    <img src="rose.png" alt="RHIT Logo" width="128" height="128" id="img_logo"/>
+                    Rose-Hulman Board Game Rental Service
+                </span>
+                <ul id="top_menu">
+                    <li><a type="button" class="menu_item" href="javascript:goToHomepage()">
+                            Home
+                    </a></li>
+                    <li><a type="button" class="menu_item" href="javascript:goToClubpage()">
+                            Club
+                    </a></li>
+                    <li><a type="button" class="menu_item" href="javascript:goToHelp()">
+                            Help
+                    </a></li>
+                    <li><a type="button" class="menu_item" href="javascript:goToProfile()">
+                            Profile
+                    </a></li>
+                    <li><a type="button" class="menu_item" href="javascript:goToSuggestion()">
+                            Suggestions
+                    </a></li>
+                </ul>
+                <div id="table_header" class="sql_head">
+                    <table>
+                        <tr>
+                            <td>Copy ID</td>
+                            <td>Name</td>
+                            <td>Borrow Date</td>
+                            <td>Due Date</td>
+                            <td>Returned</td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="game_table_div" class="sql_table">
+                    <table id="game_table"/>
+                </div>
+            </div>
+        </div>
+
+    <script>
+        window.onload = getCopies();
+        
+     	function getCopies() {
+			console.log("copies");
+			$.get('/getCopies',function(recordset){
+				console.log(recordset);
+				makeTable(recordset);
+			});
+		}
+
+		function makeTable(recordset) {
+			console.log(recordset);
+			var table = document.getElementById("game_table");
+                while (table.firstChild) {
+                    table.removeChild(table.firstChild);
+                }
+                var result;
+                for(var index in recordset) {
+                    result = recordset[index];
+
+                    var row = document.createElement("tr");
+
+                    var cell = document.createElement("td");
+                    cell.setAttribute("class", "sql_gid");
+                    var text = document.createTextNode(result.gid);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    var cell = document.createElement("td");
+                    cell.setAttribute("class", "sql_copyOf");
+                    var text = document.createTextNode(result.copyOf);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    var cell = document.createElement("td");
+                    cell.setAttribute("class", "sql_location");
+					var text;
+					if(result.location == 0){
+						  text = document.createTextNode('Available');
+					}else{
+					  text = document.createTextNode('Unavailable');
+					}
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    table.appendChild(row);
+                }
+		}
+    </script>
+
+    </body>
+</html>
