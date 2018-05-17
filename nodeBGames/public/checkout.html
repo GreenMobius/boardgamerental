@@ -92,6 +92,9 @@
                 innerDiv.appendChild(element);
                 outerDiv.appendChild(innerDiv);
 
+                element = document.createElement("hr");
+                outerDiv.appendChild(element);
+
                 innerDiv = document.createElement("div");
                 innerDiv.setAttribute("class", "small_text");
                 element = document.createTextNode(recordset[0].description);
