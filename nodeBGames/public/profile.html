@@ -102,9 +102,11 @@
                     text = result.returned + "";
                     if(text == "false") {
                         text = "Checked Out";
+                        cell.setAttribute("class", "result_unavailable");
                     }
                     if(text == "true") {
                         text = "Returned";
+                        cell.setAttribute("class", "result_available");
                     }
                     text = document.createTextNode(text);
                     cell.appendChild(text);
