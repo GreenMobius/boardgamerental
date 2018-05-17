@@ -86,8 +86,9 @@
 		function checkout(game) {
 			console.log("gid");
 			var input = game;
-		 $.get('/checkOutGame', {gid: input});
-		 alert("Checked out!");
+            $.get('/checkOutGame', {gid: input});
+            alert("Checked out!");
+            goToHomepage();
 		}
 
 		function makeTable(recordset) {
