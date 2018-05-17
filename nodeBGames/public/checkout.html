@@ -75,6 +75,24 @@
                 outerDiv.appendChild(element);
 
                 innerDiv = document.createElement("div");
+                innerDiv.style.fontSize = "15px";
+                element = document.createTextNode("Complexity: " + recordset[0].complexity + "/10");
+                innerDiv.appendChild(element);
+                outerDiv.appendChild(innerDiv);
+
+                innerDiv = document.createElement("div");
+                innerDiv.style.fontSize = "15px";
+                element = document.createTextNode("Play Time: " + recordset[0].playTime);
+                innerDiv.appendChild(element);
+                outerDiv.appendChild(innerDiv);
+
+                innerDiv = document.createElement("div");
+                innerDiv.style.fontSize = "15px";
+                element = document.createTextNode("Number of players: " + recordset[0].numPlayers);
+                innerDiv.appendChild(element);
+                outerDiv.appendChild(innerDiv);
+
+                innerDiv = document.createElement("div");
                 innerDiv.setAttribute("class", "small_text");
                 element = document.createTextNode(recordset[0].description);
                 innerDiv.appendChild(element);
