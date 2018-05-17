@@ -124,6 +124,7 @@ app.get('/findGame', function(req, res){
 	).then(
 		function (fulfilled){
 			res.json(fulfilled);
+			console.log(fulfilled);
 			console.log("Got the current game");
 		}
 	);
