@@ -86,13 +86,13 @@ input {
     width: 40%;
 }
 
-#about_panel {
+.content_panel {
     background-color: #800000;
     margin-top: 4px;
     padding-top: 6px;
 }
 
-.about {
+.content {
     background-color: white;
     width: 100%;
     font-size: 20px;
