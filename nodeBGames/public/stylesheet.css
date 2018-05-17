@@ -157,10 +157,10 @@ input {
     padding-top: 15px;
 }
 
-.result_available {
+.green {
     color: green;
 }
-.result_unavailable {
+.red {
     color: red;
 }
 
