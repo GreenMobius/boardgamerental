@@ -100,6 +100,11 @@
                     var cell = document.createElement("td");
                     cell.setAttribute("class", "table_element_short");
                     var text = document.createTextNode(result.returned);
+                    if(text == "false") {
+                        text = "Checked Out"
+                    } else {
+                        text = "Returned"
+                    }
                     cell.appendChild(text);
                     row.appendChild(cell);
 
