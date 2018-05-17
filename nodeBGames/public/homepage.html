@@ -14,7 +14,7 @@
                     <img src="rose.png" alt="RHIT Logo" width="128" height="128" id="img_logo"/>
                     Rose-Hulman Board Game Rental Service
                 </span>
-                <ul id="top_menu">
+                <ul id="top_menu" class="full_width">
                     <li><a type="button" class="menu_item" href="javascript:goToHomepage()">
                             Home
                     </a></li>
@@ -31,14 +31,16 @@
                             Suggestions
                     </a></li>
                 </ul>
-                <div id="search">
-                    <input id="search_box" type="text" placeholder="Search for a game...">
-                    <a id="search_button" type="button" class="menu_item" href="javascript:searchGames()">
-                        Search
-                    </a>
+                <div id="search" class="content_panel">
+                    <div class="content full_width">
+                        <input id="search_box" type="text" placeholder="Search for a game...">
+                        <a id="search_button" type="button" class="menu_item" href="javascript:searchGames()">
+                            Search
+                        </a>
+                    </div>
                 </div>
-                <div id="results_panel">
-                    <div id="results_table" class="results_panel"></div>
+                <div id="results_panel" class="full_width">
+                    <div id="results_table" class="results_panel full_width"></div>
                 </div>
             </div>
         </div>
@@ -127,7 +129,7 @@
                 }
                 else {
                     availableDiv.setAttribute("class", "result_available red") /* make this conditional on availability of copies of game */
-                    text = document.createTextNode("Not Available");
+                    text = document.createTextNode("Checked Out");
                 }
                 availableDiv.appendChild(text);
 
