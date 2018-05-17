@@ -122,9 +122,15 @@
 
                 availableDiv = document.createElement("div");
                 availableDiv.setAttribute("class", "result_available");
-                availableDiv.setAttribute("class", "green") /* make this conditional on availability of copies of game */
-                /*text = document.createTextNode("Available");
-                availableDiv.appendChild(text);*/
+                if (result.available > 0) {
+                    availableDiv.setAttribute("class", "green") /* make this conditional on availability of copies of game */
+                    text = document.createTextNode("Available");
+                }
+                else {
+                    availableDiv.setAttribute("class", "red") /* make this conditional on availability of copies of game */
+                    text = document.createTextNode("Not Available");
+                }
+                availableDiv.appendChild(text);
 
                 rowDiv.appendChild(nameDiv);
                 rowDiv.appendChild(availableDiv);
