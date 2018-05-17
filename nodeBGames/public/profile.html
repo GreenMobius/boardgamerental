@@ -49,17 +49,17 @@
         </div>
 
     <script>
-        let button = document.getElementById("profile_button");
-        button.setAttribute("onclick", "goToProfile()");
-        window.onload = getGameTable();
+        window.onload = getGameProfile();
         
-        function getGameTable() {
-            $.get('/request', function(recordset) {
+        function getGameProfile() {
+            $.get('/requestProfile', function(recordset) {
+				console.log(recordset);
                 makeTable(recordset);
             });
         }
 
 		function makeTable(recordset) {
+			console.log(recordset);
 			var table = document.getElementById("game_table");
                 while (table.firstChild) {
                     table.removeChild(table.firstChild);
@@ -71,32 +71,26 @@
                     var row = document.createElement("tr");
 
                     var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_game_name");
-                    var text = document.createTextNode(result.name);
+                    cell.setAttribute("class", "sql_gid");
+                    var text = document.createTextNode(result.gid);
                     cell.appendChild(text);
                     row.appendChild(cell);
 
                     var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_game_desc");
-                    var text = document.createTextNode(result.description);
+                    cell.setAttribute("class", "sql_copyOf");
+                    var text = document.createTextNode(result.copyOf);
                     cell.appendChild(text);
                     row.appendChild(cell);
 
                     var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_game_complexity");
-                    var text = document.createTextNode(result.complexity);
+                    cell.setAttribute("class", "sql_timeOut");
+                    var text = document.createTextNode((result.timeOut).substring(0,10));
                     cell.appendChild(text);
                     row.appendChild(cell);
 
                     var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_game_time");
-                    var text = document.createTextNode(result.playTime);
-                    cell.appendChild(text);
-                    row.appendChild(cell);
-
-                    var cell = document.createElement("td");
-                    cell.setAttribute("class", "sql_game_players");
-                    var text = document.createTextNode(result.numPlayers);
+                    cell.setAttribute("class", "sql_dueDate");
+                    var text = document.createTextNode((result.dueDate).substring(0,10));
                     cell.appendChild(text);
                     row.appendChild(cell);
 
