@@ -34,28 +34,28 @@
                             Officer Login
                     </a></li>
                 </ul>
-                <div class="content_panel full_width">
+                <div id="control_button_panel" class="content_panel full_width">
                     <div class="content full_width">
                         <ul id="officer_menu" class="full_width">
-                            <li><a type="button" class="officer_menu_item" href="javascript:void(0)">
+                            <li><a id="add_game_toggle" type="button" class="officer_menu_item" href="javascript:toggleView(0)">
                                     Add New Game
                             </a></li>
-                            <li><a type="button" class="officer_menu_item" href="javascript:void(0)">
+                            <li><a id="add_copy_toggle" type="button" class="officer_menu_item" href="javascript:toggleView(1)">
                                     Add Copy of Game
                             </a></li>
-                            <li><a type="button" class="officer_menu_item" href="javascript:getAllCheckedOut()">
+                            <li><a id="check_in_toggle" type="button" class="officer_menu_item" href="javascript:toggleView(2)">
                                     Check In Game
                             </a></li>
-                            <li><a type="button" class="officer_menu_item" href="javascript:void(0)">
+                            <li><a id="suggestions_toggle" type="button" class="officer_menu_item" href="javascript:toggleView(3)">
                                     View Suggestions
                             </a></li>
-                            <li><a type="button" class="officer_menu_item" href="javascript:void(0)">
+                            <li><a id="fees_toggle" type="button" class="officer_menu_item" href="javascript:toggleView(4)">
                                     Assess Fees
                             </a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="content_panel full_width">
+                <div id="add_game_panel" style="display: none;" class="content_panel full_width">
                     <div class="content full_width">
                         <p class="large_text">Add Game</p>
                         <hr>
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="content_panel full_width">
+                <div id="add_copy_panel" style="display: none;" class="content_panel full_width">
                     <div class="content full_width">
                         <p class="large_text">Add Copy</p>
                         <hr>
@@ -101,11 +101,11 @@
                             <input id="add_copy_number" type="number">
                         </div>
                         <div class="padded">
-                            <a class="menu_item table_element_medium" href="javascript:void(0)">Add Copy</a>
+                            <a class="menu_item table_element_medium" href="javascript:addCopies()">Add Copy</a>
                         </div>
                     </div>
                 </div>
-                <div class="content_panel full_width">
+                <div id="check_in_panel" style="display: none;" class="content_panel full_width">
                     <div class="content full_width">
                         <p class="large_text">Check In Games</p>
                         <hr>
@@ -138,12 +138,82 @@
 		var game_complexity = document.getElementById("add_game_complexity");
 		var game_playtime = document.getElementById("add_game_playtime");
 		var game_numPlayers = document.getElementById("add_game_players");
-		var game_numCopies = document.getElementById("add_game_copies");
+        var game_numCopies = document.getElementById("add_game_copies");
+        
+        var add_game_toggle = document.getElementById("add_game_toggle");
+        var add_game_panel = document.getElementById("add_game_panel");
+        var add_game_panel_visible = false;
 
+        var add_copy_toggle = document.getElementById("add_copy_toggle");
+        var add_copy_panel = document.getElementById("add_copy_panel");
+        var add_copy_panel_visible = false;
 
+        var check_in_toggle = document.getElementById("check_in_toggle");
+        var check_in_panel = document.getElementById("check_in_panel");
+        var check_in_panel_visible = false;
+		
+		var copy_name = document.getElementById("add_copy_name");
+		var copy_number = document.getElementById("add_copy_number");
+
+        var suggestions_toggle = document.getElementById("suggestions_toggle");
+
+        var fees_toggle = document.getElementById("fees_toggle");
+
+        function toggleView(index) {
+            if(index == 0) {
+                if(add_game_panel_visible) {
+                    add_game_panel_visible = false;
+                    add_game_panel.setAttribute("style", "display: none;");
+                    add_game_toggle.setAttribute("style", "background-color: none;");
+                } else {
+                    add_game_panel_visible = true;
+                    add_game_panel.setAttribute("style", "visibility: visible;");
+                    add_copy_panel.setAttribute("style", "display: none;");
+                    check_in_panel.setAttribute("style", "display: none;");
+                    add_game_toggle.setAttribute("style", "background-color: lightgray;");
+                    add_copy_toggle.setAttribute("style", "background-color: none;");
+                    check_in_toggle.setAttribute("style", "background-color: none;");
+                    suggestions_toggle.setAttribute("style", "background-color: none;");
+                    fees_toggle.setAttribute("style", "background-color: none;");
+                }
+            } else if(index == 1) {
+                if(add_copy_panel_visible) {
+                    add_copy_panel_visible = false;
+                    add_copy_panel.setAttribute("style", "display: none;");
+                    add_copy_toggle.setAttribute("style", "background-color: none;");
+                } else {
+                    add_copy_panel_visible = true;
+                    add_game_panel.setAttribute("style", "display: none;");
+                    add_copy_panel.setAttribute("style", "visibility: visible;");
+                    check_in_panel.setAttribute("style", "display: none;");
+                    add_game_toggle.setAttribute("style", "background-color: none;");
+                    add_copy_toggle.setAttribute("style", "background-color: lightgray;");
+                    check_in_toggle.setAttribute("style", "background-color: none;");
+                    suggestions_toggle.setAttribute("style", "background-color: none;");
+                    fees_toggle.setAttribute("style", "background-color: none;");
+                }
+            } else if(index == 2) {
+                if(check_in_panel_visible) {
+                    check_in_panel_visible = false;
+                    check_in_panel.setAttribute("style", "display: none;");
+                    check_in_toggle.setAttribute("style", "background-color: none;");
+                } else {
+                    check_in_panel_visible = true;
+                    add_game_panel.setAttribute("style", "display: none;");
+                    add_copy_panel.setAttribute("style", "display: none;");
+                    check_in_panel.setAttribute("style", "visibility: visible;");
+                    add_game_toggle.setAttribute("style", "background-color: none;");
+                    add_copy_toggle.setAttribute("style", "background-color: none;");
+                    check_in_toggle.setAttribute("style", "background-color: lightgray;");
+                    suggestions_toggle.setAttribute("style", "background-color: none;");
+                    fees_toggle.setAttribute("style", "background-color: none;");
+                    getAllCheckedOut();
+                }
+            }
+        }
 
 		function addGame() {
-			console.log("test");
+			console.log("adding Game");
 			var input1 = game_name.value;
 			var input2 = game_desc.value;
 			var input3 = game_complexity.value;
@@ -154,7 +224,8 @@
 			$.get('/addGame',{name: input1,description: input2,complexity: input3,playTime: input4,numPlayers: input5,numOfCopies: input6}, function(result){
                 console.log(result);
             }); 
-		}
+        }
+        
         function officerLogin() {
             $.get('/officerCheck',function(result){
                 console.log(result);
@@ -165,6 +236,15 @@
                 }*/
             }); 
         }
+		
+		function addCopies() {
+			console.log("adding Copies");
+			var input1 = copy_name.value;
+			var input2 = copy_number.value;
+			$.get('/addCopy',{name: input1, quantity: input2}, function(result){
+                console.log(result);
+            }); 
+		}
 		
 		function getSuggestions() {
 		     $.get('/getSuggestions',function(result){
