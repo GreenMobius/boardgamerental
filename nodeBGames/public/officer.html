@@ -42,7 +42,7 @@
         function officerLogin() {
             $.get('/officerCheck',function(result){
                 console.log(result);
-                if(result.Officer < 1) {
+                if(result[0].Officer < 1) {
                     goToHomepage();
                 }
             }); 
