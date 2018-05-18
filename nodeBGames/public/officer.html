@@ -214,16 +214,21 @@
 		function addGame() {
 			console.log("adding Game");
             var input1 = game_name.value;
-            game_name.
-			var input2 = game_desc.value;
-			var input3 = game_complexity.value;
-			var input4 = game_playtime.value;
-			var input5 = game_numPlayers.value;
-			var input6 = game_numCopies.value;
+            game_name.value = "";
+            var input2 = game_desc.value;
+            game_desc.value = "";
+            var input3 = game_complexity.value;
+            game_complexity.value = "";
+            var input4 = game_playtime.value;
+            game_playtime.value = "";
+            var input5 = game_numPlayers.value;
+            game_numPlayers.value = "";
+            var input6 = game_numCopies.value;
+            game_numCopies.value = "";
 			console.log(input1);
 			$.get('/addGame',{name: input1,description: input2,complexity: input3,playTime: input4,numPlayers: input5,numOfCopies: input6}, function(result){
                 console.log(result);
-            }); 
+            });
         }
         
         function officerLogin() {
@@ -239,8 +244,10 @@
 		
 		function addCopies() {
 			console.log("adding Copies");
-			var input1 = copy_name.value;
-			var input2 = copy_number.value;
+            var input1 = copy_name.value;
+            copy_name.value = "";
+            var input2 = copy_number.value;
+            copy_number.value = "";
 			$.get('/addCopy',{name: input1, quantity: input2}, function(result){
                 console.log(result);
             }); 
