@@ -81,6 +81,14 @@ html, body {
     margin-right: 4px;
 }
 
+#top_menu {
+    list-style-type: none;
+}
+
+.officer_menu_item {
+    width: 25%;
+}
+
 a {
     display: block;
     color: #000;
