@@ -63,27 +63,22 @@
                             <p class="medium_text">Name:</p>
                             <input id="add_game_name" type="text">
                         </div>
-                        <hr>
                         <div class="full_width padded">
                             <p class="medium_text">Description:</p>
                             <input id="add_game_desc" type="text">
                         </div>
-                        <hr>
                         <div class="full_width padded">
                             <p class="medium_text">Complexity:</p>
                             <input id="add_game_complexity" type="number">
                         </div>
-                        <hr>
                         <div class="full_width padded">
                             <p class="medium_text">Playtime:</p>
-                            <input id="add_game_playtime" type="number">
+                            <input id="add_game_playtime" type="text">
                         </div>
-                        <hr>
                         <div class="full_width padded">
                             <p class="medium_text">Maximum Number of Players:</p>
                             <input id="add_game_players" type="number">
                         </div>
-                        <hr>
                         <div class="full_width padded">
                             <p class="medium_text">Number of Copies to Add:</p>
                             <input id="add_game_copies" type="number">
@@ -101,7 +96,6 @@
                             <p class="medium_text">Game Name:</p>
                             <input id="add_copy_name" type="text">
                         </div>
-                        <hr>
                         <div class="full_width padded">
                             <p class="medium_text">Copies to Add:</p>
                             <input id="add_copy_number" type="number">
@@ -176,6 +170,13 @@
 		     $.get('/getSuggestions',function(result){
                 console.log(result);
             }); 
+        }
+        
+        function checkIn(game) {
+			console.log(game);
+            $.get('/checkIn', {gid: game});
+            alert("Checked in " + game);
+            getAllCheckedOut();
 		}
 		
 		function getAllCheckedOut() {
@@ -194,7 +195,7 @@
 
                     cell = document.createElement("td");
                     cell.setAttribute("class", "table_element_short");
-                    text = document.createTextNode(result.username);
+                    text = document.createTextNode(result.borrower);
                     cell.appendChild(text);
                     row.appendChild(cell);
 
@@ -205,9 +206,25 @@
                     row.appendChild(cell);
 
                     cell = document.createElement("td");
-                    cell.setAttribute("class", "table_element_medium");
+                    cell.setAttribute("class", "table_element_long");
+                    text = document.createTextNode(result.copyOf);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    cell = document.createElement("td");
+                    cell.setAttribute("class", "table_element_long");
                     text = document.createTextNode((result.dueDate).substring(0,10));
                     cell.appendChild(text);
+                    row.appendChild(cell);
+                    
+                    cell = document.createElement("td");
+                    cell.setAttribute("class", "table_element_medium");
+                    button = document.createElement("button");
+                    button.setAttribute("class", "menu_item");
+                    text = document.createTextNode("Check In");
+                    button.setAttribute("onclick", "checkIn(" + result.gid + ");");
+                    button.appendChild(text);
+                    cell.appendChild(button);
                     row.appendChild(cell);
 
                     table.appendChild(row);
