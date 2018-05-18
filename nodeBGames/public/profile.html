@@ -50,6 +50,21 @@
                         <table id="game_table" class="full_width"/>
                     </div>
                 </div>
+                <div class="content_panel">
+                    <div id="table_header" class="full_width content">
+                        <table class="full_width">
+                            <tr class="full_width">
+                                <td class="table_element_short">Fee ID</td>
+                                <td class="table_element_short">Amount</td>
+                                <td class="table_element_long">Reason</td>
+                                <td class="table_element_short">Paid</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="fee_table_div" class="sql_table content full_width">
+                        <table id="fee_table" class="full_width"/>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -59,13 +74,58 @@
         function getGameProfile() {
             $.get('/requestProfile', function(recordset) {
 				console.log(recordset);
-                makeTable(recordset);
+                makeGameTable(recordset);
+            });
+            $.get('/requestProfile', function(recordset) {
+                console.log(recordset);
+                makeFeeTable(recordset);
             });
         }
 
-		function makeTable(recordset) {
+		function makeGameTable(recordset) {
 			console.log(recordset);
 			var table = document.getElementById("game_table");
+                while (table.firstChild) {
+                    table.removeChild(table.firstChild);
+                }
+                var result, row, cell, text;
+                for(var index in recordset) {
+                    result = recordset[index];
+
+                    row = document.createElement("tr");
+                    row.setAttribute("class", "full_width");
+
+                    cell = document.createElement("td");
+                    cell.setAttribute("class", "table_element_short");
+                    text = document.createTextNode(result.fid);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    cell = document.createElement("td");
+                    cell.setAttribute("class", "table_element_short");
+                    text = document.createTextNode(result.amount);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    cell = document.createElement("td");
+                    cell.setAttribute("class", "table_element_long");
+                    text = document.createTextNode(result.reason);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    cell = document.createElement("td");
+                    cell.setAttribute("class", "table_element_short");
+                    text = document.createTextNode(result.paid);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    table.appendChild(row);
+                }
+		}
+
+        function makeFeeTable(recordset) {
+            console.log(recordset);
+            var table = document.getElementById("fee_table");
                 while (table.firstChild) {
                     table.removeChild(table.firstChild);
                 }
@@ -117,7 +177,7 @@
 
                     table.appendChild(row);
                 }
-		}
+        }
     </script>
 
     </body>

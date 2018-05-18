@@ -120,8 +120,21 @@ app.get('/getCopies', function(req,res) {
 	).then(
 		function(fulfilled){
 			res.json(fulfilled);
-			
 			console.log("Copies have been returned for " + game);
+		}
+	);
+});
+
+app.get('/getFees', function(req,res) {
+	console.log("getting fees for " + rhUser.username);
+	new Promise(
+		function (resolve, reject){
+			resolve(getFees());
+		}
+	).then(
+		function(fulfilled){
+			res.json(fulfilled);
+			console.log("Fees have been retrieved for " + rhUser.username);
 		}
 	);
 });
@@ -309,6 +322,7 @@ async function getSuggestions(){
 		sql.close();
 	}
 }
+
 async function checkOutGame(gid){
 	console.log("Checking out game " + gid);
 	try {
@@ -456,6 +470,27 @@ async function getGames() {
 		}
 		sql.close();
 		console.log("Received Games From Server");
+		return(toShow);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}
+
+async function getFees() {
+	console.log("Requesting Fees From Server");
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.input('username', sql.VarChar(10), rhUser.username)
+			.execute('getFees');
+		let toShow = [];
+		for(let x in result.recordset) {
+			toShow.push(result.recordset[x]);
+		}
+		sql.close();
+		console.log("Received Fees From Server");
 		return(toShow);
 	} catch (err){
 		console.log(err);
