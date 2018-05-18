@@ -35,7 +35,11 @@
                     </a></li>
                 </ul>
                 <div class="content_panel">
-                    <div id="table_header" class="full_width content">
+                    <div class="table_header full_width content">
+                        <div style="padding-bottom: 10px;">
+                            <p class="large_text">Your Rentals</p>
+                            <hr>
+                        </div>
                         <table class="full_width">
                             <tr class="full_width">
                                 <td class="table_element_short">Copy ID</td>
@@ -47,11 +51,15 @@
                         </table>
                     </div>
                     <div id="game_table_div" class="sql_table content full_width">
-                        <table id="game_table" class="full_width"/>
+                        <table id="game_table" class="full_width"></table>
                     </div>
                 </div>
                 <div class="content_panel">
-                    <div id="table_header" class="full_width content">
+                    <div class="table_header full_width content">
+                        <div style="padding-bottom: 10px;">
+                            <p class="large_text">Your Fees</p>
+                            <hr>
+                        </div>
                         <table class="full_width">
                             <tr class="full_width">
                                 <td class="table_element_short">Fee ID</td>
@@ -62,7 +70,7 @@
                         </table>
                     </div>
                     <div id="fee_table_div" class="sql_table content full_width">
-                        <table id="fee_table" class="full_width"/>
+                        <table id="fee_table" class="full_width"></table>
                     </div>
                 </div>
             </div>
@@ -75,18 +83,22 @@
             $.get('/requestProfile', function(recordset) {
 				console.log(recordset);
                 makeGameTable(recordset);
+                getFeeProfile();
             });
-            $.get('/requestProfile', function(recordset) {
+        }
+        
+        function getFeeProfile() {
+            $.get('/getFees', function(recordset) {
                 console.log(recordset);
                 makeFeeTable(recordset);
             });
         }
 
-		function makeGameTable(recordset) {
+		function makeFeeTable(recordset) {
 			console.log(recordset);
-			var table = document.getElementById("game_table");
-                while (table.firstChild) {
-                    table.removeChild(table.firstChild);
+			var gameTable = document.getElementById("fee_table");
+                while (gameTable.firstChild) {
+                    gameTable.removeChild(gameTable.firstChild);
                 }
                 var result, row, cell, text;
                 for(var index in recordset) {
@@ -119,63 +131,63 @@
                     cell.appendChild(text);
                     row.appendChild(cell);
 
-                    table.appendChild(row);
+                    gameTable.appendChild(row);
                 }
 		}
 
-        function makeFeeTable(recordset) {
-            console.log(recordset);
-            var table = document.getElementById("fee_table");
-                while (table.firstChild) {
-                    table.removeChild(table.firstChild);
+        function makeGameTable(frecordset) {
+            console.log(frecordset);
+            var feeTable = document.getElementById("game_table");
+                while (feeTable.firstChild) {
+                    feeTable.removeChild(feeTable.firstChild);
                 }
-                var result, row, cell, text;
-                for(var index in recordset) {
-                    result = recordset[index];
+                var fresult, frow, fcell, ftext;
+                for(var findex in frecordset) {
+                    fresult = frecordset[findex];
 
-                    row = document.createElement("tr");
-                    row.setAttribute("class", "full_width");
+                    frow = document.createElement("tr");
+                    frow.setAttribute("class", "full_width");
 
-                    cell = document.createElement("td");
-                    cell.setAttribute("class", "table_element_short");
-                    text = document.createTextNode(result.gid);
-                    cell.appendChild(text);
-                    row.appendChild(cell);
+                    fcell = document.createElement("td");
+                    fcell.setAttribute("class", "table_element_short");
+                    ftext = document.createTextNode(fresult.gid);
+                    fcell.appendChild(ftext);
+                    frow.appendChild(fcell);
 
-                    cell = document.createElement("td");
-                    cell.setAttribute("class", "table_element_long");
-                    text = document.createTextNode(result.copyOf);
-                    cell.appendChild(text);
-                    row.appendChild(cell);
+                    fcell = document.createElement("td");
+                    fcell.setAttribute("class", "table_element_long");
+                    ftext = document.createTextNode(fresult.copyOf);
+                    fcell.appendChild(ftext);
+                    frow.appendChild(fcell);
 
-                    cell = document.createElement("td");
-                    cell.setAttribute("class", "table_element_medium");
-                    text = document.createTextNode((result.timeOut).substring(0,10));
-                    cell.appendChild(text);
-                    row.appendChild(cell);
+                    fcell = document.createElement("td");
+                    fcell.setAttribute("class", "table_element_medium");
+                    ftext = document.createTextNode((fresult.timeOut).substring(0,10));
+                    fcell.appendChild(ftext);
+                    frow.appendChild(fcell);
 
-                    cell = document.createElement("td");
-                    cell.setAttribute("class", "table_element_medium");
-                    text = document.createTextNode((result.dueDate).substring(0,10));
-                    cell.appendChild(text);
-                    row.appendChild(cell);
+                    fcell = document.createElement("td");
+                    fcell.setAttribute("class", "table_element_medium");
+                    ftext = document.createTextNode((fresult.dueDate).substring(0,10));
+                    fcell.appendChild(ftext);
+                    frow.appendChild(fcell);
 
-                    cell = document.createElement("td");
-                    cell.setAttribute("class", "table_element_medium");
-                    text = result.returned + "";
-                    if(text == "false") {
-                        text = "Checked Out";
-                        cell.setAttribute("class", "red");
+                    fcell = document.createElement("td");
+                    fcell.setAttribute("class", "table_element_medium");
+                    ftext = fresult.returned + "";
+                    if(ftext == "false") {
+                        ftext = "Checked Out";
+                        fcell.setAttribute("class", "red");
                     }
-                    if(text == "true") {
-                        text = "Returned";
-                        cell.setAttribute("class", "green");
+                    if(ftext == "true") {
+                        ftext = "Returned";
+                        fcell.setAttribute("class", "green");
                     }
-                    text = document.createTextNode(text);
-                    cell.appendChild(text);
-                    row.appendChild(cell);
+                    ftext = document.createTextNode(ftext);
+                    fcell.appendChild(ftext);
+                    frow.appendChild(fcell);
 
-                    table.appendChild(row);
+                    feeTable.appendChild(frow);
                 }
         }
     </script>

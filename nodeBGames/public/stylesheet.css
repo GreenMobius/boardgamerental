@@ -231,7 +231,7 @@ input {
     width: 100%;
 }
 
-#table_header {
+.table_header {
     border-bottom: 2px solid black;
 }
 
