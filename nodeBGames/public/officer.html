@@ -512,12 +512,14 @@
 
                     cell = document.createElement("td");
                     cell.setAttribute("class", "table_element_medium");
-                    button = document.createElement("button");
-                    button.setAttribute("class", "menu_item");
-                    text = document.createTextNode("Mark as Paid");
-                    button.setAttribute("onclick", "payFee(" + result.fid + ");");
-                    button.appendChild(text);
-                    cell.appendChild(button);
+                    if(!result.paid) {
+                        button = document.createElement("button");
+                        button.setAttribute("class", "menu_item");
+                        text = document.createTextNode("Mark as Paid");
+                        button.setAttribute("onclick", "payFee(" + result.fid + ");");
+                        button.appendChild(text);
+                        cell.appendChild(button);
+                    }
                     row.appendChild(cell);
 
                     table.appendChild(row);
