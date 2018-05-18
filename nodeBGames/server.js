@@ -186,7 +186,7 @@ app.get('/payFee', function(req, res) {
 	console.log("paying a fee");
 	new Promise(
 		function (resolve, reject){
-			resolve(addFee(req.query.fid));
+			resolve(payFee(req.query.fid));
 		}
 	).then(
 		function (fulfilled){
