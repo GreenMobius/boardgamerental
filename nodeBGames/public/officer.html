@@ -63,27 +63,22 @@
                             <p class="medium_text">Name:</p>
                             <input id="add_game_name" type="text">
                         </div>
-                        <hr>
                         <div class="full_width padded">
                             <p class="medium_text">Description:</p>
                             <input id="add_game_desc" type="text">
                         </div>
-                        <hr>
                         <div class="full_width padded">
                             <p class="medium_text">Complexity:</p>
                             <input id="add_game_complexity" type="number">
                         </div>
-                        <hr>
                         <div class="full_width padded">
                             <p class="medium_text">Playtime:</p>
                             <input id="add_game_playtime" type="text">
                         </div>
-                        <hr>
                         <div class="full_width padded">
                             <p class="medium_text">Maximum Number of Players:</p>
                             <input id="add_game_players" type="number">
                         </div>
-                        <hr>
                         <div class="full_width padded">
                             <p class="medium_text">Number of Copies to Add:</p>
                             <input id="add_game_copies" type="number">
@@ -101,7 +96,6 @@
                             <p class="medium_text">Game Name:</p>
                             <input id="add_copy_name" type="text">
                         </div>
-                        <hr>
                         <div class="full_width padded">
                             <p class="medium_text">Copies to Add:</p>
                             <input id="add_copy_number" type="number">
@@ -157,10 +151,9 @@
         }
         
         function checkIn(game) {
-			console.log("gid");
-			var input = game;
-            $.get('/checkIn', {gid: input});
-            alert("Checked in!");
+			console.log(game);
+            $.get('/checkIn', {gid: game});
+            alert("Checked in " + game);
             getAllCheckedOut();
 		}
 		
