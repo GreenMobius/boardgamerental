@@ -126,6 +126,36 @@ app.get('/getCopies', function(req,res) {
 	);
 });
 
+app.get('/addGame', function(req, res) {
+	console.log("adding a game");
+	new Promise(
+		function (resolve, reject){
+			resolve(addGames(req.query.name, req.query.description, req.query.complexity, req.query.playTime, req.query.numPlayers, req.query.numOfCopies));
+		}
+	).then(
+		function (fulfilled){
+			res.json(fulfilled);
+			console.log("added the game");
+		}
+	);
+})
+
+app.get('/addCopy', function(req, res) {
+	console.log("adding a copy");
+	new Promise(
+		function (resolve, reject){
+			resolve(addGames(req.query.name));
+		}
+	).then(
+		function (fulfilled){
+			res.json(fulfilled);
+			console.log("added the copy");
+		}
+	);
+})
+
+	
+	
 app.get('/findGame', function(req, res){
 	console.log("getting copies of");
 	console.log(game);
@@ -298,6 +328,44 @@ async function userCheck(user){
 		sql.close();
 	}
 }
+
+async function addGame(name, description, complexity, playTime, numPlayers, available){
+	console.log("adding " + name + " to board games");
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.input('name', sql.VarChar(100), name)
+			.input('description', sql.VarChar(5000), description)
+			.input('complexity', sql.Int, complexity)
+			.input('playTime', sql.VarChar(20), playTime)
+			.input('numPlayers', sql.Int, numPlayers)
+			.input('available', sql.Int, available)
+			.execute('addNewGame');
+		sql.close();
+		return(1);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}
+
+async function addCopy(copyOf){
+	console.log("adding copy of " + copyOf + " to copies");
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.input('copyOf', sql.VarChar(100), copyOf)
+			.execute('addNewCopy');
+		sql.close();
+		return(1);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}
+
 
 async function officerCheck(user){
 	console.log("Checking for officer for " + user);
