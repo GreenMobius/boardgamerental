@@ -160,7 +160,7 @@ app.get('/addCopy', function(req, res) {
 	console.log("adding a copy");
 	new Promise(
 		function (resolve, reject){
-			resolve(addCopy(req.query.name));
+			resolve(addCopy(req.query.name, req.query.quantity));
 		}
 	).then(
 		function (fulfilled){
@@ -381,13 +381,14 @@ async function addGame(name, description, complexity, playTime, numPlayers, avai
 	}
 }
 
-async function addCopy(copyOf){
+async function addCopy(copyOf, quantity){
 	console.log("adding copy of " + copyOf + " to copies");
 	try {
 		sql.close();
 		const pool = await sql.connect(config);
 		const result = await pool.request()
 			.input('copyOf', sql.VarChar(100), copyOf)
+			.input('quantity', sql.Int, quantity)
 			.execute('addNewCopy');
 		sql.close();
 		return(1);

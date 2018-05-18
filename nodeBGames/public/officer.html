@@ -101,7 +101,7 @@
                             <input id="add_copy_number" type="number">
                         </div>
                         <div class="padded">
-                            <a class="menu_item table_element_medium" href="javascript:void(0)">Add Copy</a>
+                            <a class="menu_item table_element_medium" href="javascript:addCopies()">Add Copy</a>
                         </div>
                     </div>
                 </div>
@@ -139,11 +139,14 @@
 		var game_playtime = document.getElementById("add_game_playtime");
 		var game_numPlayers = document.getElementById("add_game_players");
 		var game_numCopies = document.getElementById("add_game_copies");
+		
+		var copy_name = document.getElementById("add_copy_name");
+		var copy_number = document.getElementById("add_copy_number");
 
 
 
 		function addGame() {
-			console.log("test");
+			console.log("adding Game");
 			var input1 = game_name.value;
 			var input2 = game_desc.value;
 			var input3 = game_complexity.value;
@@ -165,6 +168,15 @@
                 }*/
             }); 
         }
+		
+		function addCopies() {
+			console.log("adding Copies");
+			var input1 = copy_name.value;
+			var input2 = copy_number.value;
+			$.get('/addCopy',{name: input1, quantity: input2}, function(result){
+                console.log(result);
+            }); 
+		}
 		
 		function getSuggestions() {
 		     $.get('/getSuggestions',function(result){
