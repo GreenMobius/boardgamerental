@@ -143,6 +143,36 @@ app.get('/findGame', function(req, res){
 	);
 })
 
+app.get('/getSuggestions', function(req, res){
+	console.log("getting suggestions");
+	var input = game;
+	new Promise(
+		function (resolve, reject){
+			resolve(getSuggestions());
+		}
+	).then(
+		function (fulfilled){
+			res.json(fulfilled);
+			console.log("Return suggestions");
+		}
+	);
+})
+
+app.get('/getAllCheckedOut', function(req, res){
+	console.log("getting all checked out");
+	var input = game;
+	new Promise(
+		function (resolve, reject){
+			resolve(getAllCheckedOut());
+		}
+	).then(
+		function (fulfilled){
+			res.json(fulfilled);
+			console.log("Returned all checked out");
+		}
+	);
+})
+
 app.get('/setGame', function(req,res) {
 	game = req.query.name;
 	console.log(game);
@@ -197,6 +227,44 @@ async function suggestion(suggest){
 	}
 }
 
+async function getAllCheckedOut(){
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.execute('getAllCheckedOut');
+		let toShow = [];
+		for(let x in result.recordset) {
+			toShow.push(result.recordset[x]);
+		}
+		sql.close();
+		console.log("Received all checked out games");
+		return(toShow);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}
+
+async function getSuggestions(){
+	console.log("getting suggestions");
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.execute('getSuggestions');
+		let toShow = [];
+		for(let x in result.recordset) {
+			toShow.push(result.recordset[x]);
+		}
+		sql.close();
+		console.log("Received suggestions From Server");
+		return(toShow);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}
 async function checkOutGame(gid){
 	console.log("Checking out game " + gid);
 	try {
