@@ -125,6 +125,35 @@
                         <table id="check_in_table" class="full_width"></table>
                     </div>
                 </div>
+                <div id="suggestions_panel" style="display: none;" class="content_panel full_width">
+                    <div class="content full_width">
+                        <p class="large_text">Suggestions</p>
+                        <hr>
+                    </div>
+                    <div class="content full_width">
+                        <table id="suggestions_table" class="full_width"></table>
+                    </div>
+                </div>
+                <div id="fees_panel" style="display: none;" class="content_panel full_width">
+                    <div class="content full_width">
+                        <p class="large_text">Fees</p>
+                        <hr>
+                    </div>
+                    <div class="table_header full_width content">
+                        <table class="full_width">
+                            <tr class="full_width">
+                                <td class="table_element_short">Fee ID</td>
+                                <td class="table_element_short">Username</td>
+                                <td class="table_element_long">Amount</td>
+                                <td class="table_element_long">Reason</td>
+                                <td class="table_element_medium"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="content full_width">
+                        <table id="suggestions_table" class="full_width"></table>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
@@ -138,6 +167,9 @@
 		var game_playtime = document.getElementById("add_game_playtime");
 		var game_numPlayers = document.getElementById("add_game_players");
         var game_numCopies = document.getElementById("add_game_copies");
+
+        var copy_name = document.getElementById("add_copy_name");
+		var copy_number = document.getElementById("add_copy_number");
         
         var add_game_toggle = document.getElementById("add_game_toggle");
         var add_game_panel = document.getElementById("add_game_panel");
@@ -150,13 +182,14 @@
         var check_in_toggle = document.getElementById("check_in_toggle");
         var check_in_panel = document.getElementById("check_in_panel");
         var check_in_panel_visible = false;
-		
-		var copy_name = document.getElementById("add_copy_name");
-		var copy_number = document.getElementById("add_copy_number");
 
         var suggestions_toggle = document.getElementById("suggestions_toggle");
+        var suggestions_panel = document.getElementById("suggestions_panel");
+        var suggestions_panel_visible = false;
 
         var fees_toggle = document.getElementById("fees_toggle");
+        var fees_panel = document.getElementById("fees_panel");
+        var fees_panel_visible = false;
 
         function toggleView(index) {
             if(index == 0) {
@@ -169,6 +202,8 @@
                     add_game_panel.setAttribute("style", "visibility: visible;");
                     add_copy_panel.setAttribute("style", "display: none;");
                     check_in_panel.setAttribute("style", "display: none;");
+                    suggestions_panel.setAttribute("style", "display: none;");
+                    fees_panel.setAttribute("style", "display: none;");
                     add_game_toggle.setAttribute("style", "background-color: lightgray;");
                     add_copy_toggle.setAttribute("style", "background-color: none;");
                     check_in_toggle.setAttribute("style", "background-color: none;");
@@ -185,6 +220,8 @@
                     add_game_panel.setAttribute("style", "display: none;");
                     add_copy_panel.setAttribute("style", "visibility: visible;");
                     check_in_panel.setAttribute("style", "display: none;");
+                    suggestions_panel.setAttribute("style", "display: none;");
+                    fees_panel.setAttribute("style", "display: none;");
                     add_game_toggle.setAttribute("style", "background-color: none;");
                     add_copy_toggle.setAttribute("style", "background-color: lightgray;");
                     check_in_toggle.setAttribute("style", "background-color: none;");
@@ -201,12 +238,52 @@
                     add_game_panel.setAttribute("style", "display: none;");
                     add_copy_panel.setAttribute("style", "display: none;");
                     check_in_panel.setAttribute("style", "visibility: visible;");
+                    suggestions_panel.setAttribute("style", "display: none;");
+                    fees_panel.setAttribute("style", "display: none;");
                     add_game_toggle.setAttribute("style", "background-color: none;");
                     add_copy_toggle.setAttribute("style", "background-color: none;");
                     check_in_toggle.setAttribute("style", "background-color: lightgray;");
                     suggestions_toggle.setAttribute("style", "background-color: none;");
                     fees_toggle.setAttribute("style", "background-color: none;");
                     getAllCheckedOut();
+                }
+            } else if(index == 3) {
+                if(suggestions_panel_visible) {
+                    suggestions_panel_visible = false;
+                    suggestions_panel.setAttribute("style", "display: none;");
+                    suggestions_toggle.setAttribute("style", "background-color: none;");
+                } else {
+                    suggestions_panel_visible = true;
+                    add_game_panel.setAttribute("style", "display: none;");
+                    add_copy_panel.setAttribute("style", "display: none;");
+                    check_in_panel.setAttribute("style", "display: none;");
+                    suggestions_panel.setAttribute("style", "visibility: visible;");
+                    fees_panel.setAttribute("style", "display: none;");
+                    add_game_toggle.setAttribute("style", "background-color: none;");
+                    add_copy_toggle.setAttribute("style", "background-color: none;");
+                    check_in_toggle.setAttribute("style", "background-color: lightgray;");
+                    suggestions_toggle.setAttribute("style", "background-color: none;");
+                    fees_toggle.setAttribute("style", "background-color: none;");
+                    getAllSuggestions();
+                }
+            } else if(index == 4) {
+                if(fees_panel_visible) {
+                    fees_panel_visible = false;
+                    fees_panel.setAttribute("style", "display: none;");
+                    fees_toggle.setAttribute("style", "background-color: none;");
+                } else {
+                    fees_panel_visible = true;
+                    add_game_panel.setAttribute("style", "display: none;");
+                    add_copy_panel.setAttribute("style", "display: none;");
+                    check_in_panel.setAttribute("style", "display: none;");
+                    suggestions_panel.setAttribute("style", "display: none;");
+                    fees_panel.setAttribute("style", "visibility: visible;");
+                    add_game_toggle.setAttribute("style", "background-color: none;");
+                    add_copy_toggle.setAttribute("style", "background-color: none;");
+                    check_in_toggle.setAttribute("style", "background-color: none;");
+                    suggestions_toggle.setAttribute("style", "background-color: none;");
+                    fees_toggle.setAttribute("style", "background-color: lightgray;");
+                    getAllFees();
                 }
             }
         }

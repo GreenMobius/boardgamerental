@@ -247,6 +247,11 @@ input {
     width: 30%;
 }
 
+.dismiss_button {
+    float: right;
+    width: 20%;
+}
+
 /* Suggestion Box */
 #suggest {
     margin: 10px 6px 10px 6px;
