@@ -40,7 +40,7 @@
         window.onload = officerLogin();
 
         function officerLogin() {
-            $.get('/officerCheck',{user: rfUser},function(result){
+            $.get('/officerCheck',function(result){
                 console.log(result);
                 if(result.Officer < 1) {
                     goToHomepage();
