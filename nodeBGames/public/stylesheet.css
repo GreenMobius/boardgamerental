@@ -64,8 +64,17 @@ html, body {
     font-size: 12px;
 }
 
+.medium_text {
+    font-size: 16px;
+}
+
 .large_text {
     font-size: 24px;
+}
+
+.padded {
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
 
 .unimplemented {
@@ -81,7 +90,7 @@ html, body {
     margin-right: 4px;
 }
 
-#top_menu {
+#officer_menu {
     list-style-type: none;
 }
 
