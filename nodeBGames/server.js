@@ -140,6 +140,21 @@ app.get('/addGame', function(req, res) {
 	);
 })
 
+app.get('/checkIn', function(req, res) {
+	console.log("check in a game");
+	new Promise(
+		function (resolve, reject){
+			resolve(checkIn(req.gid));
+		}
+	).then(
+		function (fulfilled){
+			res.json(fulfilled);
+			console.log("checked in the game");
+		}
+	);
+})
+
+
 app.get('/addCopy', function(req, res) {
 	console.log("adding a copy");
 	new Promise(
@@ -152,9 +167,7 @@ app.get('/addCopy', function(req, res) {
 			console.log("added the copy");
 		}
 	);
-})
-
-	
+})	
 	
 app.get('/findGame', function(req, res){
 	console.log("getting copies of");
@@ -304,6 +317,22 @@ async function checkOutGame(gid){
 			.input('username', sql.VarChar(10), rhUser.username)
 			.input('gid', sql.Int, gid)
 			.execute('addNewCheckedOut');
+		sql.close();
+		return(1);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}
+
+async function checkIn(gid){
+	console.log("Checking in game " + gid);
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.input('gid', sql.Int, gid)
+			.execute('CheckIn');
 		sql.close();
 		return(1);
 	} catch (err){
