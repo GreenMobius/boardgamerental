@@ -75,8 +75,11 @@
             $.get('/requestProfile', function(recordset) {
 				console.log(recordset);
                 makeGameTable(recordset);
+                getFeeProfile();
             });
-
+        }
+        
+        function getFeeProfile() {
             $.get('/getFees', function(recordset) {
                 console.log(recordset);
                 makeFeeTable(recordset);
