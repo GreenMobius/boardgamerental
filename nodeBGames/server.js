@@ -144,7 +144,7 @@ app.get('/checkIn', function(req, res) {
 	console.log("check in a game");
 	new Promise(
 		function (resolve, reject){
-			resolve(checkIn(req.gid));
+			resolve(checkIn(req.query.gid));
 		}
 	).then(
 		function (fulfilled){
