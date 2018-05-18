@@ -182,6 +182,20 @@ app.get('/addFee', function(req, res) {
 	);
 })
 
+app.get('/payFee', function(req, res) {
+	console.log("paying a fee");
+	new Promise(
+		function (resolve, reject){
+			resolve(addFee(req.query.fid));
+		}
+	).then(
+		function (fulfilled){
+			res.json(fulfilled);
+			console.log("paid the fee");
+		}
+	);
+})
+
 app.get('/checkIn', function(req, res) {
 	console.log("check in a game");
 	new Promise(
@@ -431,7 +445,22 @@ async function addFee(username, amount, reason){
 			.input('username', sql.VarChar(10), username)
 			.input('amount', sql.Money, amount)
 			.input('reason', sql.VarChar(1000), reason)
-			.execute('AddFee');
+			.execute('addFee');
+		sql.close();
+		return(1);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}
+
+async function payFee(fid){
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.input('username', sql.Int, fid)
+			.execute('payFee');
 		sql.close();
 		return(1);
 	} catch (err){

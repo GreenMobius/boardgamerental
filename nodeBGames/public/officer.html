@@ -145,9 +145,10 @@
                             <tr class="full_width">
                                 <td class="table_element_short">Fee ID</td>
                                 <td class="table_element_medium">Username</td>
-                                <td class="table_element_long">Amount</td>
+                                <td class="table_element_short">Amount</td>
                                 <td class="table_element_long">Reason</td>
                                 <td class="table_element_short">Paid</td>
+                                <td class="table_element_medium"></td>
                             </tr>
                         </table>
                     </div>
@@ -401,6 +402,15 @@
                 console.log(result);
             });
         }
+
+        function payFee(fid) {
+			console.log("paying Fee");
+            var input1 = fid;
+			console.log(input1);
+			$.get('/payFee',{fid: input1,}, function(result){
+                console.log(result);
+            });
+        }
         
         function officerLogin() {
             $.get('/officerCheck',function(result){
@@ -482,7 +492,7 @@
                     row.appendChild(cell);
 
                     cell = document.createElement("td");
-                    cell.setAttribute("class", "table_element_long");
+                    cell.setAttribute("class", "table_element_short");
                     text = document.createTextNode(result.amount);
                     cell.appendChild(text);
                     row.appendChild(cell);
@@ -497,6 +507,16 @@
                     cell.setAttribute("class", "table_element_short");
                     text = document.createTextNode(result.paid);
                     cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    cell = document.createElement("td");
+                    cell.setAttribute("class", "table_element_medium");
+                    button = document.createElement("button");
+                    button.setAttribute("class", "menu_item");
+                    text = document.createTextNode("Mark as Paid");
+                    button.setAttribute("onclick", "payFee(" + result.fid + ");");
+                    button.appendChild(text);
+                    cell.appendChild(button);
                     row.appendChild(cell);
 
                     table.appendChild(row);
