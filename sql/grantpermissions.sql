@@ -1,0 +1,22 @@
+Use BoardGameTrackerDup
+GRANT EXECUTE ON dbo.addNewCheckedOut TO BoardGames38
+GRANT EXECUTE ON dbo.addNewCopy TO BoardGames38
+GRANT EXECUTE ON dbo.addNewFee TO BoardGames38
+GRANT EXECUTE ON dbo.addNewGame TO BoardGames38
+GRANT EXECUTE ON dbo.addNewUser TO BoardGames38
+GRANT EXECUTE ON dbo.CheckIn TO BoardGames38
+GRANT EXECUTE ON dbo.getAllCheckedOut TO BoardGames38
+GRANT EXECUTE ON dbo.getAvailableGames TO BoardGames38
+GRANT EXECUTE ON dbo.getCheckedOutGames TO BoardGames38
+GRANT EXECUTE ON dbo.getCopies TO BoardGames38
+GRANT EXECUTE ON dbo.getFees TO BoardGames38
+GRANT EXECUTE ON dbo.GetGames TO BoardGames38
+GRANT EXECUTE ON dbo.getSuggestions TO BoardGames38
+GRANT EXECUTE ON dbo.newSuggestion TO BoardGames38
+GRANT EXECUTE ON dbo.PayFee TO BoardGames38
+GRANT EXECUTE ON dbo.returnGame TO BoardGames38
+GRANT EXECUTE ON dbo.searchGame TO BoardGames38
+GRANT EXECUTE ON dbo.UserExist TO BoardGames38
+GRANT EXECUTE ON dbo.UserOfficer TO BoardGames38
+GRANT EXECUTE ON dbo.AddFee TO BoardGames38
+GRANT EXECUTE ON dbo.GetAllFees TO BoardGames38
