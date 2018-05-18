@@ -430,7 +430,7 @@ async function addFee(username, amount, reason){
 		const result = await pool.request()
 			.input('username', sql.VarChar(10), username)
 			.input('amount', sql.Money, amount)
-			.input('complexity', sql.VarChar(1000), reason)
+			.input('reason', sql.VarChar(1000), reason)
 			.execute('AddFee');
 		sql.close();
 		return(1);
