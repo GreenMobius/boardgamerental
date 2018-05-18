@@ -21,7 +21,11 @@
                 Login with RoseFire
             </a></li>
         </ul>
-
+        <ul id="top_menu" class="full_width">
+            <li><a type="button" class="menu_item" href="javascript:officerLogin()">
+                Officer Login with RoseFire
+            </a></li>
+        </ul>
         <script>
             // Please note this needs to be the result of a user interaction
             // (like a button click) otherwise it will get blocked as a popup
@@ -41,8 +45,6 @@
 							console.log(result);
 							window.setTimeout(wait,100);
 						});
-					
-                     
                     }
                     // Use the token to authenticate with your server
                     // checkout the server SDKs for more information.

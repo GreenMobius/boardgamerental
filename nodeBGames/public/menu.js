@@ -27,3 +27,9 @@ function goToHelp() {
                         window.location.replace('/help');
     }, 100);
 }
+
+function goToOfficer() {
+    window.setTimeout(function() {
+                        window.location.replace('/officer');
+    }, 100);
+}

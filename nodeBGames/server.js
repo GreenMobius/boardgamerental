@@ -68,6 +68,19 @@ app.get('/userCheck', function(req, res){
 	);
 });
 
+app.get('/officerCheck', function(req, res){
+	new Promise(
+		function (resolve, reject){
+			resolve(officerCheck(rhUser.username));
+		}
+	).then(
+		function(fulfilled){
+			res.json(fulfilled);
+			console.log("User " + rhUser.username);
+		}
+	);
+});
+
 app.get('/search', function(req, res) {
 	new Promise(
 		function (resolve, reject){
@@ -163,6 +176,10 @@ app.get('/login', function(req,res) {
     res.sendFile('index.html', {root : __dirname + '/public'});
 })
 
+app.get('/officer', function(req,res) {
+    res.sendFile('officer.html', {root : __dirname + '/public'});
+})
+
 async function suggestion(suggest){
 	console.log("Adding new suggestion for " + rhUser.username);
 	try {
@@ -208,6 +225,27 @@ async function userCheck(user){
 			.execute('userExist');
 		sql.close();
 		return(1);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}
+
+async function officerCheck(user){
+	console.log("Checking for officer for " + user);
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.input('username', sql.VarChar(10), user)
+			.execute('UserOfficer');
+		let toShow = [];
+		for(let x in result.recordset) {
+			toShow.push(result.recordset[x]);
+		}
+		sql.close();
+		console.log("Received Officer From Server");
+		return(toShow);
 	} catch (err){
 		console.log(err);
 		sql.close();

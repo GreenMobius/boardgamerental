@@ -34,34 +34,40 @@
                             Officer Login
                     </a></li>
                 </ul>
-                <div id="suggest">
-                    <textarea id="suggestion_box" rows="5" cols="50" placeholder="Enter your suggestions..."></textarea>
-                    <a id="suggestion_button" class="menu_item" href="javascript:newSuggestion()">
-                        Enter
-                    </a>
-                </div>
             </div>
         </div>
-    </body>
-    
     <script>
-        var suggestionBox = document.getElementById("suggestion_box");
-        var button = document.getElementById("suggestion_button"); //used to add eventlistener so can hit enter to search
+        window.onload = officerLogin();
 
-        suggestionBox.addEventListener("keyup", function(event) {
-                event.preventDefault();
-                 if (event.keyCode === 13) {
-                    button.click();
-                }
-        });
+        function officerLogin() {
+                Rosefire.signIn("a72ab9c6-42ae-48af-bc56-b01ae532d65f", function(err, rfUser) {
+                    if (err) {
+                        // User not logged in
+                        console.write(err);
+                        return;
+                    } else {
+                        //console.log('send hep');
+                        //console.log(rfUser.name); // rockwotj
+                        // console.log(rfUser.group);
+                        // console.log(rfUser.email);
+                        // console.log(rfUser.username);
+                        $.get('/officerCheck',{user: rfUser},function(result){
+                            console.log(result);
+                            if(result.Officer < 1) {
+                                window.setTimeout(wait,100);
+                            }
+                        }); 
+                    }
+                    // Use the token to authenticate with your server
+                    // checkout the server SDKs for more information.
+                });
+            }
 
-        function newSuggestion() {
-            var input = suggestionBox.value;
-            console.log("suggestion");
-            console.log(input);
-            $.get('/suggestion',{suggestion: input});
-            alert("Thank you for your suggestion!");
-            goToHomepage();
-        }
+            function wait() {
+                  window.location.replace('/home');
+            }
+
     </script>
+
+    </body>
 </html>
