@@ -459,7 +459,7 @@ async function payFee(fid){
 		sql.close();
 		const pool = await sql.connect(config);
 		const result = await pool.request()
-			.input('username', sql.Int, fid)
+			.input('fid', sql.Int, fid)
 			.execute('payFee');
 		sql.close();
 		return(1);
