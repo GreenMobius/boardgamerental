@@ -409,8 +409,8 @@
 			console.log(input1);
 			$.get('/payFee',{fid: input1,}, function(result){
                 console.log(result);
+                getFees();
             });
-            getFees();
         }
         
         function officerLogin() {
