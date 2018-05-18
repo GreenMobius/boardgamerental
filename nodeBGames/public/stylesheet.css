@@ -21,13 +21,20 @@ html, body {
 
 /* Search Box */
 #search {
-    margin: 10px 6px 10px 6px;
-    height: 32px;
     display: flex;
 }
 
 #search_box {
-    height: 100%;
+    height: 32px;
+    margin-left: -4px;
+}
+
+#search_button {
+    width: 20%;
+    float: right;
+    margin: 0px;
+    font-size: 16px;
+    padding-bottom: 6px;
 }
 
 /* Rose-Hulman Home Page Logo */
@@ -90,7 +97,7 @@ a:hover {
 }
 
 input {
-    width: 40%;
+    width: 80%;
 }
 
 .content_panel {
