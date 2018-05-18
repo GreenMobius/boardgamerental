@@ -154,6 +154,14 @@
 		     $.get('/getSuggestions',function(result){
                 console.log(result);
             }); 
+        }
+        
+        function checkIn(game) {
+			console.log("gid");
+			var input = game;
+            $.get('/checkIn', {gid: input});
+            alert("Checked in!");
+            getAllCheckedOut();
 		}
 		
 		function getAllCheckedOut() {
