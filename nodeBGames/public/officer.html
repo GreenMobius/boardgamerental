@@ -43,6 +43,7 @@
             $.get('/officerCheck',function(result){
                 console.log(result);
                 if(result[0].Officer < 1) {
+                    alert("You are not an officer!");
                     goToHomepage();
                 }
             }); 
