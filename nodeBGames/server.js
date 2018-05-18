@@ -168,6 +168,20 @@ app.get('/addGame', function(req, res) {
 	);
 })
 
+app.get('/addFee', function(req, res) {
+	console.log("adding a fee");
+	new Promise(
+		function (resolve, reject){
+			resolve(addFee(req.query.username, req.query.amount, req.query.reason));
+		}
+	).then(
+		function (fulfilled){
+			res.json(fulfilled);
+			console.log("added the fee");
+		}
+	);
+})
+
 app.get('/checkIn', function(req, res) {
 	console.log("check in a game");
 	new Promise(
@@ -401,6 +415,23 @@ async function addGame(name, description, complexity, playTime, numPlayers, avai
 			.input('numPlayers', sql.Int, numPlayers)
 			.input('available', sql.Int, available)
 			.execute('addNewGame');
+		sql.close();
+		return(1);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}
+
+async function addFee(username, amount, reason){
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.input('username', sql.VarChar(10), username)
+			.input('amount', sql.Money, amount)
+			.input('complexity', sql.VarChar(1000), reason)
+			.execute('AddFee');
 		sql.close();
 		return(1);
 	} catch (err){

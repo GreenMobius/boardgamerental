@@ -52,6 +52,9 @@
                             <li><a id="fees_toggle" type="button" class="officer_menu_item" href="javascript:toggleView(4)">
                                     View Fees
                             </a></li>
+                            <li><a id="create_fees_toggle" type="button" class="officer_menu_item" href="javascript:toggleView(5)">
+                                    Assess Fees
+                            </a></li>
                         </ul>
                     </div>
                 </div>
@@ -152,6 +155,27 @@
                         <table id="fees_table" class="full_width"></table>
                     </div>
                 </div>
+                <div id="create_fees_panel" style="display: none;" class="content_panel full_width">
+                    <div class="content full_width">
+                        <p class="large_text">Assess Fee</p>
+                        <hr>
+                        <div class="full_width padded">
+                            <p class="medium_text">Username:</p>
+                            <input id="add_fee_username" type="text">
+                        </div>
+                        <div class="full_width padded">
+                            <p class="medium_text">Amount:</p>
+                            <input id="add_fee_amount" type="text">
+                        </div>
+                        <div class="full_width padded">
+                            <p class="medium_text">Reason:</p>
+                            <input id="add_fee_reason" type="number">
+                        </div>
+                        <div class="padded">
+                            <a class="menu_item table_element_medium" href="javascript:addGame()">Create Fee</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
@@ -167,7 +191,11 @@
         var game_numCopies = document.getElementById("add_game_copies");
 
         var copy_name = document.getElementById("game_dropdown");
-		var copy_number = document.getElementById("add_copy_number");
+        var copy_number = document.getElementById("add_copy_number");
+        
+        var fee_username = document.getElementById("add_fee_username");
+        var fee_amount = document.getElementById("add_fee_amount");
+        var fee_reason = document.getElementById("add_fee_reason");
         
         var add_game_toggle = document.getElementById("add_game_toggle");
         var add_game_panel = document.getElementById("add_game_panel");
@@ -189,6 +217,10 @@
         var fees_panel = document.getElementById("fees_panel");
         var fees_panel_visible = false;
 
+        var create_fees_toggle = document.getElementById("create_fees_toggle");
+        var create_fees_panel = document.getElementById("create_fees_panel");
+        var create_fees_panel_visible = false;
+
         function toggleView(index) {
             if(index == 0) {
                 if(add_game_panel_visible) {
@@ -202,11 +234,13 @@
                     check_in_panel.setAttribute("style", "display: none;");
                     suggestions_panel.setAttribute("style", "display: none;");
                     fees_panel.setAttribute("style", "display: none;");
+                    create_fees_panel.setAttribute("style", "display: none");
                     add_game_toggle.setAttribute("style", "background-color: lightgray;");
                     add_copy_toggle.setAttribute("style", "background-color: none;");
                     check_in_toggle.setAttribute("style", "background-color: none;");
                     suggestions_toggle.setAttribute("style", "background-color: none;");
                     fees_toggle.setAttribute("style", "background-color: none;");
+                    create_fees_toggle.setAttribute("style", "background-color: none;");
                 }
             } else if(index == 1) {
                 if(add_copy_panel_visible) {
@@ -220,11 +254,13 @@
                     check_in_panel.setAttribute("style", "display: none;");
                     suggestions_panel.setAttribute("style", "display: none;");
                     fees_panel.setAttribute("style", "display: none;");
+                    create_fees_panel.setAttribute("style", "display: none");
                     add_game_toggle.setAttribute("style", "background-color: none;");
                     add_copy_toggle.setAttribute("style", "background-color: lightgray;");
                     check_in_toggle.setAttribute("style", "background-color: none;");
                     suggestions_toggle.setAttribute("style", "background-color: none;");
                     fees_toggle.setAttribute("style", "background-color: none;");
+                    create_fees_toggle.setAttribute("style", "background-color: none;");
                     getGames();
                 }
             } else if(index == 2) {
@@ -239,11 +275,13 @@
                     check_in_panel.setAttribute("style", "visibility: visible;");
                     suggestions_panel.setAttribute("style", "display: none;");
                     fees_panel.setAttribute("style", "display: none;");
+                    create_fees_panel.setAttribute("style", "display: none");
                     add_game_toggle.setAttribute("style", "background-color: none;");
                     add_copy_toggle.setAttribute("style", "background-color: none;");
                     check_in_toggle.setAttribute("style", "background-color: lightgray;");
                     suggestions_toggle.setAttribute("style", "background-color: none;");
                     fees_toggle.setAttribute("style", "background-color: none;");
+                    create_fees_toggle.setAttribute("style", "background-color: none;");
                     getAllCheckedOut();
                 }
             } else if(index == 3) {
@@ -258,11 +296,13 @@
                     check_in_panel.setAttribute("style", "display: none;");
                     suggestions_panel.setAttribute("style", "visibility: visible;");
                     fees_panel.setAttribute("style", "display: none;");
+                    create_fees_panel.setAttribute("style", "display: none");
                     add_game_toggle.setAttribute("style", "background-color: none;");
                     add_copy_toggle.setAttribute("style", "background-color: none;");
                     check_in_toggle.setAttribute("style", "background-color: none;");
                     suggestions_toggle.setAttribute("style", "background-color: lightgray;");
                     fees_toggle.setAttribute("style", "background-color: none;");
+                    create_fees_toggle.setAttribute("style", "background-color: none;");
                     getSuggestions();
                 }
             } else if(index == 4) {
@@ -277,12 +317,34 @@
                     check_in_panel.setAttribute("style", "display: none;");
                     suggestions_panel.setAttribute("style", "display: none;");
                     fees_panel.setAttribute("style", "visibility: visible;");
+                    create_fees_panel.setAttribute("style", "display: none");
                     add_game_toggle.setAttribute("style", "background-color: none;");
                     add_copy_toggle.setAttribute("style", "background-color: none;");
                     check_in_toggle.setAttribute("style", "background-color: none;");
                     suggestions_toggle.setAttribute("style", "background-color: none;");
                     fees_toggle.setAttribute("style", "background-color: lightgray;");
+                    create_fees_toggle.setAttribute("style", "background-color: none;");
                     getFees();
+                }
+            } else if(index == 5) {
+                if(create_fees_panel_visible) {
+                    create_fees_panel_visible = false;
+                    create_fees_panel.setAttribute("style", "display: none;");
+                    create_fees_toggle.setAttribute("style", "background-color: none;");
+                } else {
+                    create_fees_panel_visible = true;
+                    add_game_panel.setAttribute("style", "display: none;");
+                    add_copy_panel.setAttribute("style", "display: none;");
+                    check_in_panel.setAttribute("style", "display: none;");
+                    suggestions_panel.setAttribute("style", "display: none;");
+                    fees_panel.setAttribute("style", "display: none;");
+                    create_fees_panel.setAttribute("style", "visibility: visible;");
+                    add_game_toggle.setAttribute("style", "background-color: none;");
+                    add_copy_toggle.setAttribute("style", "background-color: none;");
+                    check_in_toggle.setAttribute("style", "background-color: none;");
+                    suggestions_toggle.setAttribute("style", "background-color: none;");
+                    fees_toggle.setAttribute("style", "background-color: none;");
+                    create_fees_toggle.setAttribute("style", "background-color: lightgray;");
                 }
             }
         }
@@ -322,6 +384,20 @@
             game_numCopies.value = "";
 			console.log(input1);
 			$.get('/addGame',{name: input1,description: input2,complexity: input3,playTime: input4,numPlayers: input5,numOfCopies: input6}, function(result){
+                console.log(result);
+            });
+        }
+
+        function addFees() {
+			console.log("adding Fee");
+            var input1 = fee_username.value;
+            fee_username.value = "";
+            var input2 = fee_amount.value;
+            fee_amount.value = "";
+            var input3 = fee_reason.value;
+            fee_reason.value = "";
+			console.log(input1);
+			$.get('/addFee',{username: input1,amount: input2,reason: input3,}, function(result){
                 console.log(result);
             });
         }
