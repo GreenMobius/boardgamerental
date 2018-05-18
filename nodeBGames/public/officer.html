@@ -172,7 +172,7 @@
 
                     cell = document.createElement("td");
                     cell.setAttribute("class", "table_element_short");
-                    text = document.createTextNode(result.username);
+                    text = document.createTextNode(result.borrower);
                     cell.appendChild(text);
                     row.appendChild(cell);
 
@@ -183,10 +183,23 @@
                     row.appendChild(cell);
 
                     cell = document.createElement("td");
-                    cell.setAttribute("class", "table_element_medium");
+                    cell.setAttribute("class", "table_element_long");
+                    text = document.createTextNode(result.copyOf);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    cell = document.createElement("td");
+                    cell.setAttribute("class", "table_element_long");
                     text = document.createTextNode((result.dueDate).substring(0,10));
                     cell.appendChild(text);
                     row.appendChild(cell);
+
+                    button = document.createElement("button");
+                    button.setAttribute("class", "menu_item table_element_medium");
+                    text = document.createTextNode("Check In");
+                    button.setAttribute("onclick", "checkIn(" + result.gid + ");");
+                    button.appendChild(text);
+                    cell.appendChild(button);
 
                     table.appendChild(row);
                 }
