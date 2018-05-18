@@ -94,7 +94,7 @@
                         <hr>
                         <div class="full_width padded">
                             <p class="medium_text">Game Name:</p>
-                            <input id="add_copy_name" type="text">
+                            <select id="game_dropdown"></select>
                         </div>
                         <div class="full_width padded">
                             <p class="medium_text">Copies to Add:</p>
@@ -168,7 +168,7 @@
 		var game_numPlayers = document.getElementById("add_game_players");
         var game_numCopies = document.getElementById("add_game_copies");
 
-        var copy_name = document.getElementById("add_copy_name");
+        var copy_name = document.getElementById("game_dropdown");
 		var copy_number = document.getElementById("add_copy_number");
         
         var add_game_toggle = document.getElementById("add_game_toggle");
@@ -286,6 +286,25 @@
                     getAllFees();
                 }
             }
+        }
+
+        function getGames() {
+			$.get('/search',{searchTerm: ""},function(recordset){
+                var dropdown = document.getElementById("game_dropdown");
+                while (dropdown.firstChild) {
+                    dropdown.removeChild(dropdown.firstChild);
+                }
+                var result, option, text;
+                for(var index in recordset) {
+                    result = recordset[index];
+
+                    option = document.createElement("option");
+                    option.setAttribute("value", result.name);
+                    text = document.createTextNode(result.name);
+                    option.appendChild(text);
+                    dropdown.appendChild(option);
+                }
+			});
         }
 
 		function addGame() {
