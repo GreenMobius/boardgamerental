@@ -139,6 +139,20 @@ app.get('/getFees', function(req,res) {
 	);
 });
 
+app.get('/getAllFees', function(req,res) {
+	console.log("getting fees");
+	new Promise(
+		function (resolve, reject){
+			resolve(getAllFees());
+		}
+	).then(
+		function(fulfilled){
+			res.json(fulfilled);
+			console.log("Fees have been retrieved.");
+		}
+	);
+});
+
 app.get('/addGame', function(req, res) {
 	console.log("adding a game");
 	console.log(req.query.name);
@@ -486,6 +500,26 @@ async function getFees() {
 		const result = await pool.request()
 			.input('username', sql.VarChar(10), rhUser.username)
 			.execute('getFees');
+		let toShow = [];
+		for(let x in result.recordset) {
+			toShow.push(result.recordset[x]);
+		}
+		sql.close();
+		console.log("Received Fees From Server");
+		return(toShow);
+	} catch (err){
+		console.log(err);
+		sql.close();
+	}
+}
+
+async function getAllFees() {
+	console.log("Requesting Fees From Server");
+	try {
+		sql.close();
+		const pool = await sql.connect(config);
+		const result = await pool.request()
+			.execute('getAllFees');
 		let toShow = [];
 		for(let x in result.recordset) {
 			toShow.push(result.recordset[x]);

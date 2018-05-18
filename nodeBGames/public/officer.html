@@ -31,7 +31,7 @@
                             Suggestions
                     </a></li>
                     <li><a type="button" class="menu_item" href="javascript:goToOfficer()">
-                            Officer Login
+                            Officer Page
                     </a></li>
                 </ul>
                 <div id="control_button_panel" class="content_panel full_width">
@@ -50,7 +50,7 @@
                                     View Suggestions
                             </a></li>
                             <li><a id="fees_toggle" type="button" class="officer_menu_item" href="javascript:toggleView(4)">
-                                    Assess Fees
+                                    View Fees
                             </a></li>
                         </ul>
                     </div>
@@ -129,8 +129,6 @@
                     <div class="content full_width">
                         <p class="large_text">Suggestions</p>
                         <hr>
-                    </div>
-                    <div class="content full_width">
                         <table id="suggestions_table" class="full_width"></table>
                     </div>
                 </div>
@@ -143,10 +141,10 @@
                         <table class="full_width">
                             <tr class="full_width">
                                 <td class="table_element_short">Fee ID</td>
-                                <td class="table_element_short">Username</td>
+                                <td class="table_element_medium">Username</td>
                                 <td class="table_element_long">Amount</td>
                                 <td class="table_element_long">Reason</td>
-                                <td class="table_element_medium"></td>
+                                <td class="table_element_short">Paid</td>
                             </tr>
                         </table>
                     </div>
@@ -373,6 +371,55 @@
                     cell = document.createElement("td");
                     cell.setAttribute("class", "table_element_long");
                     text = document.createTextNode(result.suggestion);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    table.appendChild(row);
+                }
+            }); 
+        }
+
+        function getFees() {
+		     $.get('/getAllFees',function(recordset){
+                console.log(recordset);
+			    var table = document.getElementById("fees_table");
+                while (table.firstChild) {
+                    table.removeChild(table.firstChild);
+                }
+                var result, row, cell, text;
+                for(var index in recordset) {
+                    result = recordset[index];
+
+                    row = document.createElement("tr");
+                    row.setAttribute("class", "full_width");
+
+                    cell = document.createElement("td");
+                    cell.setAttribute("class", "table_element_short");
+                    text = document.createTextNode(result.fid);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    cell = document.createElement("td");
+                    cell.setAttribute("class", "table_element_medium");
+                    text = document.createTextNode(result.username);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    cell = document.createElement("td");
+                    cell.setAttribute("class", "table_element_long");
+                    text = document.createTextNode(result.amount);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    cell = document.createElement("td");
+                    cell.setAttribute("class", "table_element_long");
+                    text = document.createTextNode(result.reason);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    cell = document.createElement("td");
+                    cell.setAttribute("class", "table_element_short");
+                    text = document.createTextNode(result.paid);
                     cell.appendChild(text);
                     row.appendChild(cell);
 
