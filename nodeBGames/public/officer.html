@@ -89,7 +89,7 @@
                             <input id="add_game_copies" type="number">
                         </div>
                         <div class="padded">
-                            <a class="menu_item table_element_medium" href="javascript:void(0)">Add Game</a>
+                            <a class="menu_item table_element_medium" href="javascript:addGame()">Add Game</a>
                         </div>
                     </div>
                 </div>
@@ -139,6 +139,28 @@
     <script>
         window.onload = officerLogin();
 
+		var game_name = document.getElementById("add_game_name");
+		var game_desc = document.getElementById("add_game_desc");
+		var game_complexity = document.getElementById("add_game_complexity");
+		var game_playtime = document.getElementById("add_game_playtime");
+		var game_numPlayers = document.getElementById("add_game_players");
+		var game_numCopies = document.getElementById("add_game_copies");
+
+
+
+		function addGame() {
+			console.log("test");
+			var input1 = game_name.value;
+			var input2 = game_desc.value;
+			var input3 = game_complexity.value;
+			var input4 = game_playtime.value;
+			var input5 = game_numPlayers.value;
+			var input6 = game_numCopies.value;
+			console.log(input1);
+			$.get('/addGame',{name: input1,description: input2,complexity: input3,playTime: input4,numPlayers: input5,numOfCopies: input6}, function(result){
+                console.log(result);
+            }); 
+		}
         function officerLogin() {
             $.get('/officerCheck',function(result){
                 console.log(result);

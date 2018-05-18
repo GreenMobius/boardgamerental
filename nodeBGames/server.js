@@ -128,9 +128,10 @@ app.get('/getCopies', function(req,res) {
 
 app.get('/addGame', function(req, res) {
 	console.log("adding a game");
+	console.log(req.query.name);
 	new Promise(
 		function (resolve, reject){
-			resolve(addGames(req.query.name, req.query.description, req.query.complexity, req.query.playTime, req.query.numPlayers, req.query.numOfCopies));
+			resolve(addGame(req.query.name, req.query.description, req.query.complexity, req.query.playTime, req.query.numPlayers, req.query.numOfCopies));
 		}
 	).then(
 		function (fulfilled){
@@ -144,7 +145,7 @@ app.get('/addCopy', function(req, res) {
 	console.log("adding a copy");
 	new Promise(
 		function (resolve, reject){
-			resolve(addGames(req.query.name));
+			resolve(addCopy(req.query.name));
 		}
 	).then(
 		function (fulfilled){
@@ -331,6 +332,7 @@ async function userCheck(user){
 
 async function addGame(name, description, complexity, playTime, numPlayers, available){
 	console.log("adding " + name + " to board games");
+	
 	try {
 		sql.close();
 		const pool = await sql.connect(config);
