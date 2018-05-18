@@ -351,8 +351,33 @@
 		}
 		
 		function getSuggestions() {
-		     $.get('/getSuggestions',function(result){
-                console.log(result);
+		     $.get('/getSuggestions',function(recordset){
+                console.log(recordset);
+			    var table = document.getElementById("suggestions_table");
+                while (table.firstChild) {
+                    table.removeChild(table.firstChild);
+                }
+                var result, row, cell, text;
+                for(var index in recordset) {
+                    result = recordset[index];
+
+                    row = document.createElement("tr");
+                    row.setAttribute("class", "full_width");
+
+                    cell = document.createElement("td");
+                    cell.setAttribute("class", "table_element_short");
+                    text = document.createTextNode(result.username);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    cell = document.createElement("td");
+                    cell.setAttribute("class", "table_element_long");
+                    text = document.createTextNode(result.suggestion);
+                    cell.appendChild(text);
+                    row.appendChild(cell);
+
+                    table.appendChild(row);
+                }
             }); 
         }
         
