@@ -193,13 +193,16 @@
                     text = document.createTextNode((result.dueDate).substring(0,10));
                     cell.appendChild(text);
                     row.appendChild(cell);
-
+                    
+                    cell = document.createElement("td");
+                    cell.setAttribute("class", "table_element_medium");
                     button = document.createElement("button");
-                    button.setAttribute("class", "menu_item table_element_medium");
+                    button.setAttribute("class", "menu_item");
                     text = document.createTextNode("Check In");
                     button.setAttribute("onclick", "checkIn(" + result.gid + ");");
                     button.appendChild(text);
                     cell.appendChild(button);
+                    row.appendChild(cell);
 
                     table.appendChild(row);
                 }
