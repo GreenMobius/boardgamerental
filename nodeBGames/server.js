@@ -7,7 +7,7 @@ const config = {
  user: 'BoardGames38',
  password: 'TwilightImperium20',
  server: 'golem.csse.rose-hulman.edu', 
- database: 'BoardGameTracker' 
+ database: 'BoardGameTrackerDup' 
  };
  
 app.use(express.static(__dirname + '/public')); // exposes homepage.html, per below

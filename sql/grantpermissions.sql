@@ -1,4 +1,4 @@
-Use BoardGameTrackerDup
+Use FinalBoardGameTracker
 GRANT EXECUTE ON dbo.addNewCheckedOut TO BoardGames38
 GRANT EXECUTE ON dbo.addNewCopy TO BoardGames38
 GRANT EXECUTE ON dbo.addNewFee TO BoardGames38
